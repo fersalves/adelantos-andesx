@@ -1,4 +1,4 @@
-import svgPaths from "./svg-3gncen35au";
+import svgPaths from "./svg-vuygbdqsz0";
 import ProgramadoCambioCondiciones from "@/imports/ProgramadoCambioCondiciones";
 
 function Wifi() {
@@ -267,8 +267,8 @@ function Textlink() {
 
 function CardInfo() {
   return (
-    <div className="bg-white content-stretch flex items-center justify-center px-[16px] py-[12px] relative rounded-[16px] shrink-0 w-full" data-name="Card info">
-      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[16px]" />
+    <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-[328px]" data-name="Card Info">
+      <Frame3 />
       <Textlink />
     </div>
   );
@@ -276,9 +276,161 @@ function CardInfo() {
 
 function Frame2() {
   return (
-    <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
-      <Frame3 />
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
       <CardInfo />
+    </div>
+  );
+}
+
+function MercadoCredit() {
+  return (
+    <div className="absolute left-1/2 size-[20px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Mercado credit">
+      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 20">
+        <g id="Mercado credit">
+          <g id="Vector">
+            <path clipRule="evenodd" d={svgPaths.p3b5b7560} fill="var(--fill-0, #4850E5)" fillRule="evenodd" />
+            <path clipRule="evenodd" d={svgPaths.p2806bdf0} fill="var(--fill-0, #4850E5)" fillRule="evenodd" />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function IconFrame() {
+  return (
+    <div className="absolute bg-[#e9f1ff] left-0 rounded-[32px] size-[32px] top-0" data-name="Icon frame">
+      <MercadoCredit />
+    </div>
+  );
+}
+
+function Simple32Px() {
+  return (
+    <div className="relative shrink-0 size-[32px]" data-name="simple/32px">
+      <IconFrame />
+    </div>
+  );
+}
+
+function ImageSm() {
+  return (
+    <div className="content-stretch flex items-center relative shrink-0" data-name=".Image-SM">
+      <Simple32Px />
+    </div>
+  );
+}
+
+function Content() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Content">
+      <p className="css-4hzbpn font-['Inter:regular',sans-serif] leading-[18px] max-h-[36px] not-italic overflow-hidden relative shrink-0 text-[#252537] text-[14px] text-ellipsis w-full">Obtén hasta $ 1.500.000 y devuélvelo en 7, 14, 21 o 28 días.</p>
+    </div>
+  );
+}
+
+function ArrowRight2() {
+  return (
+    <div className="relative shrink-0 size-[16px]" data-name="Arrow right">
+      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+        <g id="Arrow right">
+          <path d={svgPaths.pe12ebf0} fill="var(--fill-0, #4850E5)" id="Vector" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function TextLink() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-center relative shrink-0" data-name="Text Link">
+      <div className="css-g0mm18 flex flex-col font-['Inter:semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#4850e5] text-[14px] text-right">
+        <p className="css-ew64yg leading-[18px]">Obtener Dinero Express</p>
+      </div>
+      <ArrowRight2 />
+    </div>
+  );
+}
+
+function Left() {
+  return (
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-px min-w-px relative" data-name="Left">
+      <Content />
+      <TextLink />
+    </div>
+  );
+}
+
+function Right() {
+  return <div className="content-stretch flex flex-col items-end self-stretch shrink-0" data-name="Right" />;
+}
+
+function Content1() {
+  return (
+    <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-start min-h-px min-w-px relative" data-name="Content">
+      <Left />
+      <Right />
+    </div>
+  );
+}
+
+function Content2() {
+  return (
+    <div className="content-stretch flex flex-[1_0_0] gap-[16px] items-start min-h-px min-w-px relative" data-name="Content">
+      <ImageSm />
+      <Content1 />
+    </div>
+  );
+}
+
+function ListRowSimple() {
+  return (
+    <div className="bg-white content-stretch flex items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-name="List Row Simple">
+      <Content2 />
+    </div>
+  );
+}
+
+function Card1() {
+  return (
+    <div className="bg-white content-stretch flex flex-col items-start p-[16px] relative rounded-[20px] shrink-0 w-[328px]" data-name="Card 1 ↴">
+      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[20px]" />
+      <ListRowSimple />
+    </div>
+  );
+}
+
+function Card2() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Card">
+      <Card1 />
+    </div>
+  );
+}
+
+function Content3() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center relative shrink-0 w-[328px]" data-name="Content">
+      <Card2 />
+    </div>
+  );
+}
+
+function CardSection() {
+  return (
+    <div className="content-stretch flex flex-col gap-[16px] items-start relative rounded-[6px] shrink-0 w-[328px]" data-name="Card Section">
+      <Content3 />
+    </div>
+  );
+}
+
+function Cross() {
+  return (
+    <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-name="cross">
+      <p className="css-ew64yg font-['Inter:Bold',sans-serif] leading-[22px] not-italic overflow-hidden relative shrink-0 text-[#282834] text-[18px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+        ¿Necesitas más dinero?
+      </p>
+      <CardSection />
     </div>
   );
 }
@@ -291,16 +443,17 @@ function Frame({ customText, onRevisarCostoClick }: { customText?: string; onRev
         <div className="shrink-0 w-[328px]">
           <ProgramadoCambioCondiciones customText={customText} onRevisarCostoClick={onRevisarCostoClick} />
         </div>
+        <Cross />
       </div>
     </div>
   );
 }
 
-export default function AdminSinAdelantarConProgramadoCambioCondiciones({ 
-  customText, 
+export default function AdminSinAdelantarConProgramadoCambioCondiciones({
+  customText,
   onRevisarCostoClick,
-}: { 
-  customText?: string; 
+}: {
+  customText?: string;
   onRevisarCostoClick?: () => void;
 }) {
   return (
