@@ -483,7 +483,7 @@ export default function AdminConProgramadoNoAcreditado({
     setLocalToggleState(newState);
     onToggleChange?.(newState);
     
-    setSnackbarMessage(newState ? "Encendiste tu adelanto" : "Pausaste tu adelanto");
+    setSnackbarMessage(newState ? "Encendiste tu adelanto recurrente." : "Pausaste tu adelanto recurrente.");
     setShowSnackbar(true);
   };
 

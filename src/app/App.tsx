@@ -37,7 +37,7 @@ export default function App() {
     
     // Se estava desativado e agora ativou, mostrar snackbar
     if (wasInactive) {
-      setSnackbarMessage("Encendiste tu adelanto");
+      setSnackbarMessage("Encendiste tu adelanto recurrente.");
       setShowSnackbar(true);
     }
   };
@@ -287,7 +287,8 @@ export default function App() {
   };
 
   return (
-    <div className="size-full flex items-start justify-center bg-[#f5f5f5] p-6 gap-[100px]">
+    <div className="size-full flex items-center justify-center bg-[#f5f5f5] p-6">
+      <div className="flex items-start gap-[100px]">
       {/* Menu de casos de uso - Organizado em Dropdowns */}
       <div className="w-[650px] flex-shrink-0 bg-white rounded-[20px] shadow-md p-6 max-h-[calc(100vh-48px)] overflow-y-auto">
         <h3 className="text-lg font-semibold text-gray-800 mb-8">Selecciona el caso de uso para probar</h3>
@@ -366,6 +367,7 @@ export default function App() {
           show={showSnackbar}
           onHide={() => setShowSnackbar(false)}
         />
+      </div>
       </div>
     </div>
   );

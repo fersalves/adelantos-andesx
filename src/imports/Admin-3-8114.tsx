@@ -587,7 +587,7 @@ function Content4() {
   return (
     <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-start min-h-px min-w-px relative" data-name="Content">
       <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-end leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[14px] text-white" style={{ fontFeatureSettings: "'case'" }}>
-        <p className="css-4hzbpn leading-[18px]">Pausaste tu adelanto</p>
+        <p className="css-4hzbpn leading-[18px]">Pausaste tu adelanto recurrente.</p>
       </div>
     </div>
   );

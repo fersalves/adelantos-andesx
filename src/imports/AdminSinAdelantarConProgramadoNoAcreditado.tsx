@@ -472,7 +472,7 @@ export default function AdminSinAdelantarConProgramadoNoAcreditado({
     onToggleChange?.(newState); // Notificar o pai
     
     // Definir mensagem baseada no novo estado
-    setSnackbarMessage(newState ? "Encendiste tu adelanto" : "Pausaste tu adelanto");
+    setSnackbarMessage(newState ? "Encendiste tu adelanto recurrente." : "Pausaste tu adelanto recurrente.");
     setShowSnackbar(true);
   };
 
