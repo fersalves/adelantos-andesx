@@ -16,6 +16,7 @@ import AlInstante from "@/imports/AlInstante";
 import FeedbackScreen from "@/imports/FeedbackScreen";
 import { ProgramadosFlow } from "@/app/components/ProgramadosFlow";
 import { Snackbar } from "@/app/components/Snackbar";
+import { BottomSheetCambioCondiciones } from "@/app/components/BottomSheetCambioCondiciones";
 
 export default function App() {
   const [selectedCase, setSelectedCase] = useState("totally-sin-programado");
@@ -26,6 +27,15 @@ export default function App() {
   const [isProgramadoActive, setIsProgramadoActive] = useState(true); // Estado para saber se o programado está ativo ou pausado
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [showCambioCondicionesSheet, setShowCambioCondicionesSheet] = useState(false);
+  const [cambioCondicionesAceptado, setCambioCondicionesAceptado] = useState(false);
+
+  const handleAceptarCambioCondiciones = () => {
+    setShowCambioCondicionesSheet(false);
+    setCambioCondicionesAceptado(true);
+    setSnackbarMessage("Aceptaste el cambio de condiciones.");
+    setShowSnackbar(true);
+  };
 
   // Função chamada quando o fluxo de Programados é completado
   const handleProgramadosComplete = (frequencyText: string, frequencyType: string, selectedDay?: string) => {
@@ -50,6 +60,7 @@ export default function App() {
     setHasInteraction(false); // Resetar a interação
     setSelectedFrequency(null); // Resetar a frequência selecionada
     setIsProgramadoActive(true); // Resetar o estado de ativação
+    setCambioCondicionesAceptado(false); // Resetar o estado de aceite
   };
 
   // Função chamada quando há interação na tela do CDU
@@ -228,7 +239,8 @@ export default function App() {
 
     // Casos específicos "Cambio de condiciones" para Totally allowed
     if (totallyCambioCondicionesCases.includes(selectedCase)) {
-      return <AdminConProgramadoCambioCondiciones onAdelantarClick={navigateToAlInstante} />;
+      if (cambioCondicionesAceptado) return <AdminConProgramado onAdelantarClick={navigateToAlInstante} onModificarClick={handleModificarClick} isToggleOn={isProgramadoActive} onToggleChange={handleToggleChange} />;
+      return <AdminConProgramadoCambioCondiciones onAdelantarClick={navigateToAlInstante} onRevisarCostoClick={() => setShowCambioCondicionesSheet(true)} />;
     }
 
     // Casos específicos "No se acreditó" para Partially allowed
@@ -238,7 +250,8 @@ export default function App() {
 
     // Casos específicos "Cambio de condiciones" para Partially allowed
     if (partiallyCambioCondicionesCases.includes(selectedCase)) {
-      return <AdminPartiallyConProgramadoCambioCondiciones onAdelantarClick={navigateToAlInstante} />;
+      if (cambioCondicionesAceptado) return <AdminPartiallyConProgramado onAdelantarClick={navigateToAlInstante} onModificarClick={handleModificarClick} isToggleOn={isProgramadoActive} onToggleChange={handleToggleChange} />;
+      return <AdminPartiallyConProgramadoCambioCondiciones onAdelantarClick={navigateToAlInstante} onRevisarCostoClick={() => setShowCambioCondicionesSheet(true)} />;
     }
 
     // Casos específicos "No se acreditó" para Sin dinero a adelantar
@@ -248,7 +261,8 @@ export default function App() {
 
     // Casos específicos "Cambio de condiciones" para Sin dinero a adelantar
     if (sinAdelantarCambioCondicionesCases.includes(selectedCase)) {
-      return <AdminSinAdelantarConProgramadoCambioCondiciones />;
+      if (cambioCondicionesAceptado) return <AdminSinAdelantarConProgramado onModificarClick={handleModificarClick} isToggleOn={isProgramadoActive} onToggleChange={handleToggleChange} />;
+      return <AdminSinAdelantarConProgramadoCambioCondiciones onRevisarCostoClick={() => setShowCambioCondicionesSheet(true)} />;
     }
 
     // Se há um programadoText, mostrar a versão "con programado"
@@ -362,10 +376,17 @@ export default function App() {
         )}
         
         {/* Snackbar para mostrar mensagens - dentro do container da tela */}
-        <Snackbar 
+        <Snackbar
           message={snackbarMessage}
           show={showSnackbar}
           onHide={() => setShowSnackbar(false)}
+        />
+
+        {/* Bottom sheet cambio de condiciones */}
+        <BottomSheetCambioCondiciones
+          show={showCambioCondicionesSheet}
+          onClose={() => setShowCambioCondicionesSheet(false)}
+          onAceptar={handleAceptarCambioCondiciones}
         />
       </div>
       </div>
