@@ -23,7 +23,7 @@ export function BottomSheetCambioCondiciones({ show, onClose, onAceptar }: Botto
   if (!show) return null;
 
   return (
-    <div className="absolute inset-0 flex flex-col justify-end" style={{ zIndex: 50 }}>
+    <div className="absolute inset-0 flex flex-col justify-end" style={{ zIndex: 100 }}>
       {/* Dimmer: rgba(40,40,51,0.60) */}
       <div
         className="absolute inset-0"

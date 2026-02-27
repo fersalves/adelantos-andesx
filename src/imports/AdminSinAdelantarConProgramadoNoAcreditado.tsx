@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAdminActions } from "@/app/contexts/AdminContext";
 import svgPaths from "./svg-vuygbdqsz0";
 import { Snackbar } from "@/app/components/Snackbar";
 import ProgramadoCard from "@/imports/Programado";
@@ -59,7 +60,7 @@ function StatusBarAndroid() {
     <div className="h-[52px] relative shrink-0 w-full" data-name="Status bar android">
       <div className="flex flex-row items-end size-full">
         <div className="content-stretch flex items-end justify-between leading-[0] px-[24px] py-[10px] relative size-full">
-          <div className="css-g0mm18 flex flex-col font-['Roboto:Medium',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
             <p className="css-ew64yg leading-[20px]">12:30</p>
           </div>
           <RightIcons />
@@ -114,8 +115,9 @@ function History() {
 }
 
 function IconButton() {
+  const { onHistorialClick } = useAdminActions();
   return (
-    <div className="bg-[#e9f1ff] content-stretch flex items-center justify-center max-h-[40px] min-h-[40px] px-0 py-[2px] relative rounded-[12px] shrink-0 size-[40px]" data-name="Icon button">
+    <div onClick={onHistorialClick} className="bg-[#e9f1ff] content-stretch flex items-center justify-center max-h-[40px] min-h-[40px] px-0 py-[2px] relative rounded-[12px] shrink-0 size-[40px] cursor-pointer" data-name="Icon button">
       <History />
     </div>
   );
@@ -180,7 +182,7 @@ function Title() {
     <div className="relative shrink-0 w-full" data-name="Title">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex items-center justify-between px-[16px] py-[8px] relative w-full">
-          <p className="css-4hzbpn flex-[1_0_0] font-['Inter:Bold',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+          <p className="css-4hzbpn flex-[1_0_0] font-['Inter',sans-serif] font-bold leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'", fontWeight: 700 }}>
             Adelantos
           </p>
         </div>
@@ -210,7 +212,7 @@ function Frame1() {
 function Amount() {
   return (
     <div className="content-stretch flex items-baseline relative shrink-0" data-name="Amount">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[34px]">0</p>
       </div>
     </div>
@@ -220,7 +222,7 @@ function Amount() {
 function MoneyConfig() {
   return (
     <div className="content-stretch flex gap-[6px] items-baseline relative shrink-0" data-name="Money config.">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[34px]">$</p>
       </div>
       <Amount />
@@ -256,10 +258,10 @@ function ArrowRight() {
   );
 }
 
-function Textlink() {
+function Textlink({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-name="Textlink">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[16px]" style={{ fontFeatureSettings: "'case'" }}>
+    <div onClick={onClick} className="content-stretch flex gap-[4px] items-center relative shrink-0 cursor-pointer" data-name="Textlink">
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[16px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[20px]">¿Por qué no puedo adelantar?</p>
       </div>
       <ArrowRight />
@@ -267,19 +269,19 @@ function Textlink() {
   );
 }
 
-function CardInfo() {
+function CardInfo({ onPorQueClick }: { onPorQueClick?: () => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-[328px]" data-name="Card Info">
       <Frame3 />
-      <Textlink />
+      <Textlink onClick={onPorQueClick} />
     </div>
   );
 }
 
-function Frame2() {
+function Frame2({ onPorQueClick }: { onPorQueClick?: () => void }) {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-      <CardInfo />
+      <CardInfo onPorQueClick={onPorQueClick} />
     </div>
   );
 }
@@ -326,7 +328,7 @@ function ImageSm() {
 function Content() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Content">
-      <p className="css-4hzbpn font-['Inter:regular',sans-serif] leading-[18px] max-h-[36px] not-italic overflow-hidden relative shrink-0 text-[#252537] text-[14px] text-ellipsis w-full">Obtén hasta $ 1.500.000 y devuélvelo en 7, 14, 21 o 28 días.</p>
+      <p className="css-4hzbpn font-['Inter',sans-serif] leading-[18px] max-h-[36px] not-italic overflow-hidden relative shrink-0 text-[#252537] text-[14px] text-ellipsis w-full">Obtén hasta $ 1.500.000 y devuélvelo en 7, 14, 21 o 28 días.</p>
     </div>
   );
 }
@@ -346,7 +348,7 @@ function ArrowRight2() {
 function TextLink() {
   return (
     <div className="content-stretch flex gap-[4px] items-center justify-center relative shrink-0" data-name="Text Link">
-      <div className="css-g0mm18 flex flex-col font-['Inter:semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#4850e5] text-[14px] text-right">
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#4850e5] text-[14px] text-right" style={{ fontWeight: 600 }}>
         <p className="css-ew64yg leading-[18px]">Obtener Dinero Express</p>
       </div>
       <ArrowRight2 />
@@ -396,8 +398,8 @@ function ListRowSimple() {
 function Card1() {
   return (
     <div className="bg-white content-stretch flex flex-col items-start p-[16px] relative rounded-[20px] shrink-0 w-[328px]" data-name="Card 1 ↴">
-      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[20px]" />
       <ListRowSimple />
+      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[20px]" />
     </div>
   );
 }
@@ -429,7 +431,7 @@ function CardSection() {
 function Cross() {
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-name="cross">
-      <p className="css-ew64yg font-['Inter:Bold',sans-serif] leading-[22px] not-italic overflow-hidden relative shrink-0 text-[#282834] text-[18px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+      <p className="css-ew64yg font-['Inter',sans-serif] font-bold leading-[22px] not-italic overflow-hidden relative shrink-0 text-[#282834] text-[18px] text-ellipsis" style={{ fontFeatureSettings: "'case'", fontWeight: 700 }}>
         ¿Necesitas más dinero?
       </p>
       <CardSection />
@@ -437,11 +439,11 @@ function Cross() {
   );
 }
 
-function Frame({ isOn, onToggle, customText, onModificarClick }: { isOn: boolean; onToggle: () => void; customText?: string; onModificarClick?: () => void }) {
+function Frame({ isOn, onToggle, customText, onModificarClick, onPorQueClick }: { isOn: boolean; onToggle: () => void; customText?: string; onModificarClick?: () => void; onPorQueClick?: () => void }) {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full">
       <div className="content-stretch flex flex-col gap-[48px] items-start px-[16px] py-0 relative size-full">
-        <Frame2 />
+        <Frame2 onPorQueClick={onPorQueClick} />
         <div className="shrink-0 w-[328px]">
           <ProgramadoCard customText={customText} isOn={isOn} onToggle={onToggle} onModificarClick={onModificarClick} showErrorMessage={true} />
         </div>
@@ -455,32 +457,31 @@ export default function AdminSinAdelantarConProgramadoNoAcreditado({
   customText,
   onModificarClick,
   isToggleOn = true,
-  onToggleChange
+  onToggleChange,
+  onPorQueClick,
 }: {
   customText?: string;
   onModificarClick?: () => void;
   isToggleOn?: boolean;
   onToggleChange?: (isOn: boolean) => void;
+  onPorQueClick?: () => void;
 }) {
   const [localToggleState, setLocalToggleState] = useState(isToggleOn);
+  useEffect(() => { setLocalToggleState(isToggleOn); }, [isToggleOn]);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const handleToggle = () => {
     const newState = !localToggleState;
     setLocalToggleState(newState);
-    onToggleChange?.(newState); // Notificar o pai
-    
-    // Definir mensagem baseada no novo estado
-    setSnackbarMessage(newState ? "Encendiste tu adelanto recurrente." : "Pausaste tu adelanto recurrente.");
-    setShowSnackbar(true);
+    onToggleChange?.(newState);
   };
 
   return (
     <div className="bg-white relative rounded-[16px] size-full" data-name="Admin">
       <div className="content-stretch flex flex-col gap-[24px] items-start overflow-clip pb-[24px] pt-0 px-0 relative rounded-[inherit] size-full">
         <Frame1 />
-        <Frame isOn={localToggleState} onToggle={handleToggle} customText={customText} onModificarClick={onModificarClick} />
+        <Frame isOn={localToggleState} onToggle={handleToggle} customText={customText} onModificarClick={onModificarClick} onPorQueClick={onPorQueClick} />
         <Snackbar 
           message={snackbarMessage}
           show={showSnackbar}

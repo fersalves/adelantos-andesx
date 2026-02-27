@@ -1,4 +1,5 @@
 import svgPaths from "./svg-i93uay8bjo";
+import { useAdminActions } from "@/app/contexts/AdminContext";
 
 function Wifi() {
   return (
@@ -56,7 +57,7 @@ function StatusBarAndroid() {
     <div className="h-[52px] relative shrink-0 w-full" data-name="Status bar android">
       <div className="flex flex-row items-end size-full">
         <div className="content-stretch flex items-end justify-between leading-[0] px-[24px] py-[10px] relative size-full">
-          <div className="css-g0mm18 flex flex-col font-['Roboto:Medium',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
             <p className="css-ew64yg leading-[20px]">12:30</p>
           </div>
           <RightIcons />
@@ -111,8 +112,9 @@ function History() {
 }
 
 function IconButton() {
+  const { onHistorialClick } = useAdminActions();
   return (
-    <div className="bg-[#e9f1ff] content-stretch flex items-center justify-center max-h-[40px] min-h-[40px] px-0 py-[2px] relative rounded-[12px] shrink-0 size-[40px]" data-name="Icon button">
+    <div onClick={onHistorialClick} className="bg-[#e9f1ff] content-stretch flex items-center justify-center max-h-[40px] min-h-[40px] px-0 py-[2px] relative rounded-[12px] shrink-0 size-[40px] cursor-pointer" data-name="Icon button">
       <History />
     </div>
   );
@@ -177,7 +179,7 @@ function Title() {
     <div className="relative shrink-0 w-full" data-name="Title">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex items-center justify-between px-[16px] py-[8px] relative w-full">
-          <p className="css-4hzbpn flex-[1_0_0] font-['Inter:Bold',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+          <p className="css-4hzbpn flex-[1_0_0] font-['Inter',sans-serif] font-bold leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'", fontWeight: 700 }}>
             Adelanto disponible
           </p>
         </div>
@@ -207,7 +209,7 @@ function Frame1() {
 function Amount() {
   return (
     <div className="content-stretch flex items-baseline relative shrink-0" data-name="Amount">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[34px]">50.000.000</p>
       </div>
     </div>
@@ -217,7 +219,7 @@ function Amount() {
 function MoneyConfig() {
   return (
     <div className="content-stretch flex gap-[6px] items-baseline relative shrink-0" data-name="Money config.">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[34px]">$</p>
       </div>
       <Amount />
@@ -256,7 +258,7 @@ function ArrowRight() {
 function Textlink() {
   return (
     <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-name="Textlink">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[16px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[16px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[20px]">Adelantar</p>
       </div>
       <ArrowRight />
@@ -308,10 +310,10 @@ function Thumbnail() {
 function Frame5() {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start leading-[0] min-h-px min-w-px not-italic relative">
-      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] h-[24px] justify-center relative shrink-0 text-[16px] text-black w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] font-semibold h-[24px] justify-center relative shrink-0 text-[#282834] text-[16px] w-full" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-4hzbpn leading-[20px]">Tu adelanto recurrente</p>
       </div>
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] h-[24px] justify-center relative shrink-0 text-[#282834] text-[14px] w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] h-[24px] justify-center relative shrink-0 text-[#282834] text-[14px] w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[18px]">Lo recibes todos los lunes</p>
       </div>
     </div>
@@ -389,7 +391,7 @@ function ArrowRight1() {
 function Textlink1() {
   return (
     <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-name="Textlink">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[14px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[18px]">Modificar</p>
       </div>
       <ArrowRight1 />
@@ -413,7 +415,6 @@ function Card() {
         <Thumbnail />
         <Frame6 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[20px] shadow-[0px_0px_0px_0px_rgba(255,255,255,0)]" />
     </div>
   );
 }
@@ -460,7 +461,7 @@ function ImageSm() {
 function Content() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Content">
-      <p className="css-4hzbpn font-['Inter:regular',sans-serif] leading-[18px] max-h-[36px] not-italic overflow-hidden relative shrink-0 text-[#252537] text-[14px] text-ellipsis w-full">Obtén hasta $ 1.500.000 y devuélvelo en 7, 14, 21 o 28 días.</p>
+      <p className="css-4hzbpn font-['Inter',sans-serif] leading-[18px] max-h-[36px] not-italic overflow-hidden relative shrink-0 text-[#252537] text-[14px] text-ellipsis w-full">Obtén hasta $ 1.500.000 y devuélvelo en 7, 14, 21 o 28 días.</p>
     </div>
   );
 }
@@ -480,7 +481,7 @@ function ArrowRight2() {
 function TextLink() {
   return (
     <div className="content-stretch flex gap-[4px] items-center justify-center relative shrink-0" data-name="Text Link">
-      <div className="css-g0mm18 flex flex-col font-['Inter:semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#4850e5] text-[14px] text-right">
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#4850e5] text-[14px] text-right" style={{ fontWeight: 600 }}>
         <p className="css-ew64yg leading-[18px]">Obtener Dinero Express</p>
       </div>
       <ArrowRight2 />
@@ -530,7 +531,6 @@ function ListRowSimple() {
 function Card1() {
   return (
     <div className="bg-white content-stretch flex flex-col items-start p-[16px] relative rounded-[20px] shrink-0 w-[328px]" data-name="Card 1 ↴">
-      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[20px]" />
       <ListRowSimple />
     </div>
   );
@@ -563,7 +563,7 @@ function CardSection() {
 function Cross() {
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-name="cross">
-      <p className="css-ew64yg font-['Inter:Bold',sans-serif] leading-[22px] not-italic overflow-hidden relative shrink-0 text-[#282834] text-[18px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+      <p className="css-ew64yg font-['Inter',sans-serif] font-bold leading-[22px] not-italic overflow-hidden relative shrink-0 text-[#282834] text-[18px] text-ellipsis" style={{ fontFeatureSettings: "'case'", fontWeight: 700 }}>
         ¿Necesitas más dinero?
       </p>
       <CardSection />
@@ -586,7 +586,7 @@ function Frame() {
 function Content4() {
   return (
     <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-start min-h-px min-w-px relative" data-name="Content">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-end leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[14px] text-white" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-end leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[14px] text-white" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[18px]">Pausaste tu adelanto recurrente.</p>
       </div>
     </div>

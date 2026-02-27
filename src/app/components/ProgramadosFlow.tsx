@@ -1,54 +1,37 @@
 import { useState } from "react";
 import Programados from "@/imports/Programados-15-10729";
-import ProgramadosPausado from "@/imports/Programados-18-20470";
-import FeedbackScreen from "@/imports/FeedbackScreen-18-18805";
 import { ProgramadosPausadoScreen } from "@/app/components/ProgramadosPausadoScreen";
 
 interface ProgramadosFlowProps {
   onIrAlInicioClick?: () => void;
   onComplete?: (adminText: string, frequencyType: string, selectedDay?: string) => void;
+  onFeedbackOpen?: (frequencyText: string, adminText: string, frequencyType: string, selectedDay?: string) => void;
+  onFrequencyChangeFromPaused?: (frequencyType: string, selectedDay?: string) => void;
+  onRevertToPaused?: () => void;
   initialFrequency?: { type: string; selectedDay?: string };
   isProgramadoActive?: boolean;
 }
 
-export function ProgramadosFlow({ onIrAlInicioClick, onComplete, initialFrequency, isProgramadoActive = true }: ProgramadosFlowProps) {
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [feedbackText, setFeedbackText] = useState("");
-  const [adminText, setAdminText] = useState("");
-  const [frequencyType, setFrequencyType] = useState("");
-  const [selectedDay, setSelectedDay] = useState<string | undefined>(undefined);
+export function ProgramadosFlow({ onIrAlInicioClick, onComplete, onFeedbackOpen, onFrequencyChangeFromPaused, onRevertToPaused, initialFrequency, isProgramadoActive = true }: ProgramadosFlowProps) {
+  const [confirmEnabled, setConfirmEnabled] = useState(false);
+  // Tracks the frequency the user selected on the paused screen (new selection)
+  const [fromPausedFrequency, setFromPausedFrequency] = useState<{ type: string; selectedDay?: string } | null>(null);
 
-  // Se há initialFrequency mas não há adminText, derivar o adminText da initialFrequency
-  const getCurrentAdminText = () => {
-    if (adminText) return adminText;
-    
-    if (initialFrequency) {
-      if (initialFrequency.type === "todos-dias") {
-        return "Lo recibes todos los días";
-      } else if (initialFrequency.type === "semanal" && initialFrequency.selectedDay) {
-        const dayNamesAdmin: { [key: string]: string } = {
-          'lun': 'lunes',
-          'mar': 'martes',
-          'mie': 'miércoles',
-          'jue': 'jueves',
-          'vie': 'viernes',
-          'sab': 'sábados',
-          'dom': 'domingos'
-        };
-        return `Lo recibes todos los ${dayNamesAdmin[initialFrequency.selectedDay] || 'días'}`;
-      } else if (initialFrequency.type === "15-dias") {
-        return "Lo recibes los días 1 y 15";
-      }
-    }
-    
-    return "Lo recibes todos los lunes"; // Fallback padrão
+  const reset = () => {
+    setConfirmEnabled(false);
+    setFromPausedFrequency(null);
+  };
+
+  const handleIrAlInicio = () => {
+    reset();
+    onIrAlInicioClick?.();
   };
 
   const handleConfirm = (frequencyType: string, selectedDay?: string) => {
-    // Mapear o tipo de frequência para o texto do feedback e do card Admin
+    reset();
     let feedbackFrequencyText = "";
     let adminCardText = "";
-    
+
     if (frequencyType === "todos-dias") {
       feedbackFrequencyText = "todos los días";
       adminCardText = "Lo recibes todos los días";
@@ -77,24 +60,13 @@ export function ProgramadosFlow({ onIrAlInicioClick, onComplete, initialFrequenc
       feedbackFrequencyText = "los días 1 y 15";
       adminCardText = "Lo recibes los días 1 y 15";
     }
-    
-    setFeedbackText(feedbackFrequencyText);
-    setAdminText(adminCardText);
-    setFrequencyType(frequencyType);
-    setSelectedDay(selectedDay);
-    setShowFeedback(true);
-  };
 
-  const handleCloseFeedback = () => {
-    setShowFeedback(false);
-    // Chamar onComplete passando o texto do card Admin, tipo de frequência e dia selecionado
-    onComplete?.(adminText, frequencyType, selectedDay);
+    onFeedbackOpen?.(feedbackFrequencyText, adminCardText, frequencyType, selectedDay);
   };
 
   const handleReactivar = (frequencyType: string, selectedDay?: string) => {
-    // Quando reativar, criar o adminText baseado nos dados recebidos
     let adminCardText = "";
-    
+
     if (frequencyType === "todos-dias") {
       adminCardText = "Lo recibes todos los días";
     } else if (frequencyType === "semanal" && selectedDay) {
@@ -111,30 +83,41 @@ export function ProgramadosFlow({ onIrAlInicioClick, onComplete, initialFrequenc
     } else if (frequencyType === "15-dias") {
       adminCardText = "Lo recibes los días 1 y 15";
     }
-    
+
     onComplete?.(adminCardText, frequencyType, selectedDay);
   };
 
-  if (showFeedback) {
-    return (
-      <FeedbackScreen
-        onCloseClick={handleCloseFeedback}
-        onIrAlInicioClick={handleCloseFeedback}
-        frequencyText={feedbackText}
-      />
-    );
-  }
+  const handleFrequencyChangeFromPaused = (frequencyType: string, selectedDay?: string) => {
+    setFromPausedFrequency({ type: frequencyType, selectedDay });
+    setConfirmEnabled(true);
+    onFrequencyChangeFromPaused?.(frequencyType, selectedDay);
+  };
+
+  const handleRevertToPaused = () => {
+    reset();
+    onRevertToPaused?.();
+  };
+
+  // When arrived from paused flow:
+  // - fromPausedFrequency is the new selection (shown pre-selected in Programados)
+  // - initialFrequency (from App.tsx, never updated during this flow) is the original paused freq (used for revert check)
+  const programadosInitialFrequency = fromPausedFrequency || initialFrequency;
+  const originalPausedFrequency = fromPausedFrequency ? initialFrequency : undefined;
 
   return (
-    isProgramadoActive ? 
+    isProgramadoActive ?
     <Programados
-      onIrAlInicioClick={onIrAlInicioClick}
+      onIrAlInicioClick={handleIrAlInicio}
       onConfirmClick={handleConfirm}
-      initialFrequency={initialFrequency}
+      initialFrequency={programadosInitialFrequency}
+      confirmEnabled={confirmEnabled}
+      onRevertToPaused={handleRevertToPaused}
+      originalPausedFrequency={originalPausedFrequency}
     /> :
     <ProgramadosPausadoScreen
-      onBackClick={onIrAlInicioClick}
+      onBackClick={handleIrAlInicio}
       onReactivarClick={handleReactivar}
+      onFrequencyChangeFromPaused={handleFrequencyChangeFromPaused}
       initialFrequency={initialFrequency}
     />
   );

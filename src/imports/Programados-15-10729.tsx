@@ -8,9 +8,9 @@ import { SeletoresDiasComCard } from "./Programados-18-10817";
 function CardDetallesDelRecibimiento() {
   return (
     <div className="bg-[#f4f5f9] content-stretch flex flex-col items-start overflow-clip relative rounded-[20px] shrink-0 w-full px-[16px] py-[16px]" data-name="Card detalles del recibimiento">
-      <p className="css-4hzbpn leading-[16px] text-[12px] font-['Inter:Regular',sans-serif] text-[#282834]">
+      <p className="css-4hzbpn leading-[16px] text-[12px] font-['Inter',sans-serif] text-[#282834]">
         <span>{`Recibirás tu dinero `}</span>
-        <span className="font-['Inter:Semi_Bold',sans-serif]">
+        <span className="font-['Inter',sans-serif]">
           todos los días entre las 8:00 y 11:00am
         </span>
         <span>{` (hora centro).`}</span>
@@ -23,9 +23,9 @@ function CardDetallesDelRecibimiento() {
 function CardCada15Dias() {
   return (
     <div className="bg-[#f4f5f9] content-stretch flex flex-col items-start overflow-clip relative rounded-[20px] shrink-0 w-full px-[16px] py-[16px]" data-name="Card detalles del recibimiento">
-      <p className="css-4hzbpn leading-[16px] text-[12px] font-['Inter:Regular',sans-serif] text-[#282834]">
+      <p className="css-4hzbpn leading-[16px] text-[12px] font-['Inter',sans-serif] text-[#282834]">
         <span>{`Recibirás tu dinero `}</span>
-        <span className="font-['Inter:Semi_Bold',sans-serif]">
+        <span className="font-['Inter',sans-serif]">
           todos los días 1 y 15 entre las 8:00 y 11:00am
         </span>
         <span>{` (hora centro).`}</span>
@@ -129,7 +129,7 @@ function StatusBarAndroid() {
     <div className="h-[52px] relative shrink-0 w-full" data-name="Status bar android">
       <div className="flex flex-row items-end size-full">
         <div className="content-stretch flex items-end justify-between leading-[0] px-[24px] py-[10px] relative size-full">
-          <div className="css-g0mm18 flex flex-col font-['Roboto:Medium',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
             <p className="css-ew64yg leading-[20px]">12:30</p>
           </div>
           <RightIcons />
@@ -217,7 +217,7 @@ function Header({ onBackClick }: { onBackClick?: () => void }) {
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex gap-[8px] items-center px-[16px] py-[12px] relative w-full">
           <Back onClick={onBackClick} />
-          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[16px] text-center text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[16px] text-center text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
             <p className="css-g0mm18 leading-[20px] overflow-hidden">&nbsp;</p>
           </div>
           <Actions />
@@ -227,13 +227,13 @@ function Header({ onBackClick }: { onBackClick?: () => void }) {
   );
 }
 
-function Title() {
+function Title({ isModifying }: { isModifying?: boolean }) {
   return (
     <div className="relative shrink-0 w-full" data-name="Title">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex items-center justify-between px-[16px] py-[8px] relative w-full">
-          <p className="css-4hzbpn flex-[1_0_0] font-['Inter:Bold',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
-            Elige la frecuencia de tu adelanto recurrente
+          <p className="css-4hzbpn flex-[1_0_0] font-bold font-['Inter',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontWeight: 700, fontFeatureSettings: "'case'" }}>
+            {isModifying ? "Modifica tu adelanto recurrente" : "Configura tu adelanto recurrente"}
           </p>
         </div>
       </div>
@@ -241,20 +241,20 @@ function Title() {
   );
 }
 
-function Header1({ onBackClick }: { onBackClick?: () => void }) {
+function Header1({ onBackClick, isModifying }: { onBackClick?: () => void; isModifying?: boolean }) {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Header">
       <Header onBackClick={onBackClick} />
-      <Title />
+      <Title isModifying={isModifying} />
     </div>
   );
 }
 
-function Header2({ onBackClick }: { onBackClick?: () => void }) {
+function Header2({ onBackClick, isModifying }: { onBackClick?: () => void; isModifying?: boolean }) {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="header">
       <StatusBarAndroid />
-      <Header1 onBackClick={onBackClick} />
+      <Header1 onBackClick={onBackClick} isModifying={isModifying} />
     </div>
   );
 }
@@ -274,7 +274,7 @@ function PaddingLeft() {
 function TitleRow() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Todos los días</p>
       </div>
     </div>
@@ -303,10 +303,8 @@ function PaddingRight() {
 
 function ListRow() {
   return (
-    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px px-0 py-[12px] relative rounded-[8px]" data-name="List row">
-      <PaddingLeft />
+    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px p-[12px] relative rounded-[8px]" data-name="List row">
       <Content />
-      <PaddingRight />
     </div>
   );
 }
@@ -315,10 +313,10 @@ function Selector({ onClick, isSelected }: { onClick?: () => void; isSelected?: 
   return (
     <div
       onClick={onClick}
-      className="bg-white flex-[1_0_0] min-h-[32px] min-w-[32px] relative rounded-[12px] cursor-pointer hover:bg-gray-50 transition-colors"
+      className="bg-white flex-[1_0_0] h-[56px] min-w-[32px] relative rounded-[12px] cursor-pointer hover:bg-gray-50 transition-colors"
       data-name="Selector 1"
     >
-      <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-[inherit] overflow-clip relative rounded-[inherit] w-full">
+      <div className="content-stretch flex items-center justify-center h-full overflow-clip relative rounded-[inherit] w-full">
         <ListRow />
       </div>
       <div 
@@ -360,7 +358,7 @@ function PaddingLeft1() {
 function TitleRow1() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Una vez a la semana</p>
       </div>
     </div>
@@ -389,10 +387,8 @@ function PaddingRight1() {
 
 function ListRow1() {
   return (
-    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px px-0 py-[12px] relative rounded-[8px]" data-name="List row">
-      <PaddingLeft1 />
+    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px p-[12px] relative rounded-[8px]" data-name="List row">
       <Content1 />
-      <PaddingRight1 />
     </div>
   );
 }
@@ -401,10 +397,10 @@ function Selector1({ onClick, isSelected }: { onClick?: () => void; isSelected?:
   return (
     <div
       onClick={onClick}
-      className="bg-white flex-[1_0_0] min-h-[32px] min-w-[32px] relative rounded-[12px] cursor-pointer hover:bg-gray-50 transition-colors"
+      className="bg-white flex-[1_0_0] h-[56px] min-w-[32px] relative rounded-[12px] cursor-pointer hover:bg-gray-50 transition-colors"
       data-name="Selector 2"
     >
-      <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-[inherit] overflow-clip relative rounded-[inherit] w-full">
+      <div className="content-stretch flex items-center justify-center h-full overflow-clip relative rounded-[inherit] w-full">
         <ListRow1 />
       </div>
       <div 
@@ -434,7 +430,7 @@ function PaddingLeft2() {
 function TitleRow2() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Una vez cada 15 días</p>
       </div>
     </div>
@@ -463,10 +459,8 @@ function PaddingRight2() {
 
 function ListRow2() {
   return (
-    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px px-0 py-[12px] relative rounded-[8px]" data-name="List row">
-      <PaddingLeft2 />
+    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px p-[12px] relative rounded-[8px]" data-name="List row">
       <Content2 />
-      <PaddingRight2 />
     </div>
   );
 }
@@ -475,10 +469,10 @@ function Selector2({ onClick, isSelected }: { onClick?: () => void; isSelected?:
   return (
     <div
       onClick={onClick}
-      className="bg-white flex-[1_0_0] min-h-[32px] min-w-[32px] relative rounded-[12px] cursor-pointer hover:bg-gray-50 transition-colors"
+      className="bg-white flex-[1_0_0] h-[56px] min-w-[32px] relative rounded-[12px] cursor-pointer hover:bg-gray-50 transition-colors"
       data-name="Selector 3"
     >
-      <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-[inherit] overflow-clip relative rounded-[inherit] w-full">
+      <div className="content-stretch flex items-center justify-center h-full overflow-clip relative rounded-[inherit] w-full">
         <ListRow2 />
       </div>
       <div 
@@ -604,16 +598,17 @@ function Selectores({ onTodosDiasClick, onSemanalClick, on15DiasClick, selectedF
   );
 }
 
-function Body({ onBackClick, onTodosDiasClick, onSemanalClick, on15DiasClick, selectedFrequency }: { 
+function Body({ onBackClick, onTodosDiasClick, onSemanalClick, on15DiasClick, selectedFrequency, isModifying }: {
   onBackClick?: () => void;
   onTodosDiasClick?: () => void;
   onSemanalClick?: () => void;
   on15DiasClick?: () => void;
   selectedFrequency?: string | null;
+  isModifying?: boolean;
 }) {
   return (
-    <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full" data-name="body">
-      <Header2 onBackClick={onBackClick} />
+    <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full" data-name="body">
+      <Header2 onBackClick={onBackClick} isModifying={isModifying} />
       <Selectores 
         onTodosDiasClick={onTodosDiasClick}
         onSemanalClick={onSemanalClick}
@@ -663,25 +658,23 @@ function PaddingLeft3() {
 function TitleRow3() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#646587] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
-        <p className="css-4hzbpn leading-[16px] text-[12px]">
-          <span>{`El costo varía entre el 0,35% y 13,50%. `}</span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter:Semi_Bold',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
-            Conoce cómo
-            <br aria-hidden="true" />
-            se calcula
-          </span>
-          <span>
-            {`. `}
-            <br aria-hidden="true" />
-            <br aria-hidden="true" />
-            {`Al confirmar, aceptas los `}
-          </span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter:Semi_Bold',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
-            Términos y condiciones
-          </span>
-          .
-        </p>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#646587] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <p className="css-4hzbpn leading-[16px] text-[12px] text-[#282833]">
+            <span>{`El costo puede variar entre el 0,35% y 13,50%. `}</span>
+            <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
+              Conoce cómo se calcula
+            </span>
+            <span>.</span>
+          </p>
+          <p className="css-4hzbpn leading-[16px] text-[12px] text-[#282833]">
+            <span>{`Al confirmar, aceptas los `}</span>
+            <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
+              Términos y condiciones
+            </span>
+            <span>.</span>
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -709,7 +702,7 @@ function PaddingRight3() {
 
 function ListRow3() {
   return (
-    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px px-0 py-[12px] relative rounded-[8px]" data-name="List row">
+    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px px-0 py-[16px] relative rounded-[8px]" data-name="List row">
       <PaddingLeft3 />
       <Content3 />
       <PaddingRight3 />
@@ -740,8 +733,8 @@ function SlotContainerVPaddings() {
 function IconLabel({ isActive }: { isActive?: boolean }) {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Icon & Label">
-      <div className={`css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] ${isActive ? 'text-white' : 'text-[#9c9ebf]'}`} style={{ fontFeatureSettings: "'case'" }}>
-        <p className="css-ew64yg leading-[18px]">Confirmar programación</p>
+      <div className={`css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[14px] ${isActive ? 'text-white' : 'text-[#9c9ebf]'}`} style={{ fontFeatureSettings: "'case'" }}>
+        <p className="css-ew64yg leading-[18px]">Confirmar adelanto recurrente</p>
       </div>
     </div>
   );
@@ -792,14 +785,20 @@ function FixedFooter({ isActive, onClick }: { isActive?: boolean; onClick?: () =
   );
 }
 
-export default function Programados({ 
+export default function Programados({
   onIrAlInicioClick,
   onConfirmClick,
-  initialFrequency
-}: { 
+  initialFrequency,
+  confirmEnabled,
+  onRevertToPaused,
+  originalPausedFrequency
+}: {
   onIrAlInicioClick?: () => void;
   onConfirmClick?: (frequencyType: string, selectedDay?: string) => void;
   initialFrequency?: { type: string; selectedDay?: string };
+  confirmEnabled?: boolean;
+  onRevertToPaused?: () => void;
+  originalPausedFrequency?: { type: string; selectedDay?: string };
 }) {
   const [selectedFrequency, setSelectedFrequency] = useState<string | null>(
     initialFrequency?.type || null
@@ -810,12 +809,12 @@ export default function Programados({
 
   // Determinar se o botão deve estar ativo
   // Se há initialFrequency, o botão fica inativo até que mude a seleção
-  const hasChanged = initialFrequency 
+  const hasChanged = initialFrequency
     ? (selectedFrequency !== initialFrequency.type || selectedDay !== initialFrequency.selectedDay)
     : true;
-    
-  const isButtonActive = hasChanged && (
-    selectedFrequency === "todos-dias" || 
+
+  const isButtonActive = (confirmEnabled || hasChanged) && (
+    selectedFrequency === "todos-dias" ||
     selectedFrequency === "15-dias" ||
     (selectedFrequency === "semanal" && !!selectedDay)
   );
@@ -826,20 +825,53 @@ export default function Programados({
     }
   };
 
+  const pausedType = originalPausedFrequency?.type;
+
+  const handleTodosDiasClick = () => {
+    if (confirmEnabled && pausedType === "todos-dias") {
+      onRevertToPaused?.();
+    } else {
+      setSelectedFrequency("todos-dias");
+    }
+  };
+
+  const handleSemanalClick = () => {
+    if (confirmEnabled && pausedType === "semanal") {
+      onRevertToPaused?.();
+    } else {
+      setSelectedFrequency("semanal");
+    }
+  };
+
+  const handle15DiasClick = () => {
+    if (confirmEnabled && pausedType === "15-dias") {
+      onRevertToPaused?.();
+    } else {
+      setSelectedFrequency("15-dias");
+    }
+  };
+
   return (
     <div className="bg-white content-stretch flex flex-col items-start justify-between overflow-clip relative rounded-[16px] size-full" data-name="Programados">
       <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
-        <Body 
+        <Body
           onBackClick={onIrAlInicioClick}
-          onTodosDiasClick={() => setSelectedFrequency("todos-dias")}
-          onSemanalClick={() => setSelectedFrequency("semanal")}
-          on15DiasClick={() => setSelectedFrequency("15-dias")}
+          onTodosDiasClick={handleTodosDiasClick}
+          onSemanalClick={handleSemanalClick}
+          on15DiasClick={handle15DiasClick}
           selectedFrequency={selectedFrequency}
+          isModifying={!!initialFrequency}
         />
-        <ConditionalContent 
-          selectedFrequency={selectedFrequency} 
-          selectedDay={selectedDay} 
-          onDayClick={setSelectedDay} 
+        <ConditionalContent
+          selectedFrequency={selectedFrequency}
+          selectedDay={selectedDay}
+          onDayClick={(day) => {
+            if (confirmEnabled && selectedFrequency === originalPausedFrequency?.type && day === originalPausedFrequency?.selectedDay) {
+              onRevertToPaused?.();
+            } else {
+              setSelectedDay(day);
+            }
+          }}
         />
       </div>
       <FixedFooter isActive={isButtonActive} onClick={handleConfirmClick} />

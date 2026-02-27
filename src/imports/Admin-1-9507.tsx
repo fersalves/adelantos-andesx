@@ -1,4 +1,4 @@
-import svgPaths from "./svg-ul94wtzbit";
+import svgPaths from "./svg-78db0dszuw";
 
 function Wifi() {
   return (

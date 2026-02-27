@@ -28,10 +28,10 @@ function Thumbnail() {
 function Frame1({ customText }: { customText?: string }) {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start leading-[0] min-h-px min-w-px not-italic relative">
-      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] h-[24px] justify-center relative shrink-0 text-[16px] text-black w-full" style={{ fontFeatureSettings: "'case'" }}>
-        <p className="css-4hzbpn leading-[20px]">Adelanto recurrente</p>
+      <div className="flex flex-col font-['Inter',sans-serif] font-semibold h-[24px] justify-center relative shrink-0 text-[#282834] text-[16px] w-full" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
+        <p className="css-4hzbpn leading-[20px]">Tu adelanto recurrente</p>
       </div>
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center relative shrink-0 text-[#282834] text-[14px] w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center relative shrink-0 text-[#282834] text-[14px] w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[18px]">{customText || "Lo recibes todos los martes"}</p>
       </div>
     </div>
@@ -135,7 +135,7 @@ function Textlink({ onClick, text }: { onClick?: () => void; text?: string }) {
       className="content-stretch flex gap-[4px] items-center relative shrink-0 cursor-pointer"
       data-name="Textlink"
     >
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[14px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[18px]">{text || "Ver detalles"}</p>
       </div>
       <ArrowRight />
@@ -175,7 +175,7 @@ function ErrorHeader() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Header">
       <BadgeContainer />
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative self-stretch text-[#282834] text-[14px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative self-stretch text-[#282834] text-[14px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[18px]">No pudimos realizar tu adelanto por un error. Volveremos a intentarlo en la próxima fecha.</p>
       </div>
     </div>

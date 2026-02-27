@@ -177,16 +177,16 @@ export function AdminNotAllowed() {
 
           {/* First group: requirements list + info card — 32px below title */}
           <div className="flex flex-col gap-[16px] items-start w-full mt-[32px]">
-            {/* Requirements list — group has px-[16px], rows add px-[8px] internally */}
-            <div className="flex flex-col items-start w-full px-[16px]">
+            {/* Requirements list — rows handle own px-[16px] */}
+            <div className="flex flex-col items-start w-full">
               <RequirementRow passing={false} text="Mantener buenas prácticas dentro de la plataforma." link="Entender como mejorar" />
-              <div className="h-px bg-[#d0d4e6] w-full" />
+              <div className="h-px bg-[#d0d4e6] mx-[16px] w-[calc(100%-32px)]" />
               <RequirementRow passing={false} text="Estar al día con tus deudas por reclamos o devoluciones." link="Revisar deudas" />
-              <div className="h-px bg-[#d0d4e6] w-full" />
+              <div className="h-px bg-[#d0d4e6] mx-[16px] w-[calc(100%-32px)]" />
               <RequirementRow passing={false} text="Vender por lo menos 1 vez al mes durante 3 meses." link="Consultar historial de ventas" />
-              <div className="h-px bg-[#d0d4e6] w-full" />
+              <div className="h-px bg-[#d0d4e6] mx-[16px] w-[calc(100%-32px)]" />
               <RequirementRow passing={true} text="Vender $ 10.000.000 en el último mes." />
-              <div className="h-px bg-[#d0d4e6] w-full" />
+              <div className="h-px bg-[#d0d4e6] mx-[16px] w-[calc(100%-32px)]" />
               <RequirementRow passing={true} text="Tener buena reputación al vender en Mercado Libre." />
             </div>
 

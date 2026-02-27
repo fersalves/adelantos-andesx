@@ -56,7 +56,7 @@ function StatusBarAndroid() {
     <div className="h-[52px] relative shrink-0 w-full" data-name="Status bar android">
       <div className="flex flex-row items-end size-full">
         <div className="content-stretch flex items-end justify-between leading-[0] px-[24px] py-[10px] relative size-full">
-          <div className="css-g0mm18 flex flex-col font-['Roboto:Medium',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
             <p className="css-ew64yg leading-[20px]">12:30</p>
           </div>
           <RightIcons />
@@ -140,7 +140,7 @@ function Header() {
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex gap-[8px] items-center px-[16px] py-[12px] relative w-full">
           <Back />
-          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[16px] text-center text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[16px] text-center text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
             <p className="css-g0mm18 leading-[20px] overflow-hidden">&nbsp;</p>
           </div>
           <Actions />
@@ -155,7 +155,7 @@ function Title() {
     <div className="relative shrink-0 w-full" data-name="Title">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex items-center justify-between px-[16px] py-[8px] relative w-full">
-          <p className="css-4hzbpn flex-[1_0_0] font-['Inter:Bold',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+          <p className="css-4hzbpn flex-[1_0_0] font-['Inter',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
             Elige la frecuencia de tu adelanto recurrente
           </p>
         </div>
@@ -197,7 +197,7 @@ function PaddingLeft() {
 function TitleRow() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Todos los días</p>
       </div>
     </div>
@@ -272,7 +272,7 @@ function PaddingLeft1() {
 function TitleRow1() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Una vez a la semana</p>
       </div>
     </div>
@@ -335,7 +335,7 @@ function PaddingLeft2() {
 function TitleRow2() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Una vez cada 15 días</p>
       </div>
     </div>
@@ -414,7 +414,7 @@ function Frame1() {
 function Dias() {
   return (
     <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip px-0 py-[6px] relative shrink-0" data-name="Dias">
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Lun</p>
       </div>
     </div>
@@ -435,7 +435,7 @@ function Selector3() {
 function Dias1() {
   return (
     <div className="bg-white content-stretch flex flex-[1_0_0] flex-col items-center justify-center min-h-px min-w-px overflow-clip px-0 py-[6px] relative" data-name="Dias">
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Mar</p>
       </div>
     </div>
@@ -456,7 +456,7 @@ function Selector4() {
 function Dias2() {
   return (
     <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip px-0 py-[6px] relative shrink-0" data-name="Dias">
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Mié</p>
       </div>
     </div>
@@ -477,7 +477,7 @@ function Selector5() {
 function Dias3() {
   return (
     <div className="bg-white content-stretch flex flex-[1_0_0] flex-col items-center justify-center min-h-px min-w-px overflow-clip px-0 py-[6px] relative" data-name="Dias">
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Jue</p>
       </div>
     </div>
@@ -498,7 +498,7 @@ function Selector6() {
 function Dias4() {
   return (
     <div className="bg-white content-stretch flex flex-[1_0_0] flex-col items-center justify-center min-h-px min-w-px overflow-clip px-0 py-[6px] relative" data-name="Dias">
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Vie</p>
       </div>
     </div>
@@ -519,7 +519,7 @@ function Selector7() {
 function Dias5() {
   return (
     <div className="bg-white content-stretch flex flex-[1_0_0] flex-col items-center justify-center min-h-px min-w-px overflow-clip px-0 py-[6px] relative" data-name="Dias">
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Sáb</p>
       </div>
     </div>
@@ -540,7 +540,7 @@ function Selector8() {
 function Dias6() {
   return (
     <div className="bg-white content-stretch flex flex-[1_0_0] flex-col items-center justify-center min-h-px min-w-px overflow-clip px-0 py-[6px] relative" data-name="Dias">
-      <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px]">Dom</p>
       </div>
     </div>
@@ -575,7 +575,7 @@ function Container1() {
 function Frame() {
   return (
     <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-ew64yg leading-[16px]">Selecciona el día</p>
       </div>
       <Container1 />
@@ -607,10 +607,10 @@ function PaddingLeft3() {
 function TitleRow3() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px] text-[12px]">
           <span>{`Recibirás tu dinero `}</span>
-          <span className="font-['Inter:Semi_Bold',sans-serif] not-italic" style={{ fontFeatureSettings: "'case'" }}>
+          <span className="font-['Inter',sans-serif] not-italic" style={{ fontFeatureSettings: "'case'" }}>
             todos los miércoles entre las 8:00 y 11:00am
           </span>
           <span>{` (hora centro).`}</span>
@@ -727,10 +727,10 @@ function PaddingLeft4() {
 function TitleRow4() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#646587] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#646587] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-4hzbpn leading-[16px] text-[12px]">
           <span>{`El costo varía entre el 0,35% y 13,50%. `}</span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter:Semi_Bold',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
+          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
             Conoce cómo
             <br aria-hidden="true" />
             se calcula
@@ -741,7 +741,7 @@ function TitleRow4() {
             <br aria-hidden="true" />
             {`Al confirmar, aceptas los `}
           </span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter:Semi_Bold',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
+          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter',sans-serif] not-italic text-[#434ce4] underline" style={{ fontFeatureSettings: "'case'" }}>
             Términos y condiciones
           </span>
           .
@@ -804,7 +804,7 @@ function SlotContainerVPaddings() {
 function IconLabel() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Icon & Label">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-white" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-white" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-ew64yg leading-[18px]">Confirmar programación</p>
       </div>
     </div>
@@ -877,7 +877,7 @@ export function SeletoresDiasComCard({ selectedDay, onDayClick }: { selectedDay?
     <div className="px-[16px] w-full flex flex-col gap-[24px]">
       {/* Seletores de dias */}
       <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-        <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center" style={{ fontFeatureSettings: "'case'" }}>
+        <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center" style={{ fontFeatureSettings: "'case'" }}>
           <p className="css-ew64yg leading-[16px]">Selecciona el día</p>
         </div>
         <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full">
@@ -889,7 +889,7 @@ export function SeletoresDiasComCard({ selectedDay, onDayClick }: { selectedDay?
             >
               <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-[inherit] overflow-clip relative rounded-[inherit] w-full">
                 <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip px-0 py-[6px] relative shrink-0">
-                  <div className="flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+                  <div className="flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
                     <p className="css-4hzbpn leading-[16px] capitalize">{day}</p>
                   </div>
                 </div>
@@ -910,9 +910,9 @@ export function SeletoresDiasComCard({ selectedDay, onDayClick }: { selectedDay?
       {/* Card com detalhes se um dia foi selecionado */}
       {selectedDay && (
         <div className="bg-[#f4f5f9] content-stretch flex flex-col items-start overflow-clip relative rounded-[20px] shrink-0 w-full px-[16px] py-[16px]">
-          <p className="css-4hzbpn leading-[16px] text-[12px] font-['Inter:Regular',sans-serif] text-[#282834]">
+          <p className="css-4hzbpn leading-[16px] text-[12px] font-['Inter',sans-serif] text-[#282834]">
             <span>{`Recibirás tu dinero `}</span>
-            <span className="font-['Inter:Semi_Bold',sans-serif]">
+            <span className="font-['Inter',sans-serif]">
               todos los {dayNames[selectedDay]} entre las 8:00 y 11:00am
             </span>
             <span>{` (hora centro).`}</span>

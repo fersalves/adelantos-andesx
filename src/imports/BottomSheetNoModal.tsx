@@ -4,13 +4,49 @@ import svgPathsInfo from './svg-a44kuo30zz';
 
 // Função para formatar números com separadores de milhares
 function formatNumber(num: number): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\\d))/g, ".");
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+// Formata valor para exibição compacta nos dias do calendário
+function formatAmount(amount: number): string {
+  if (amount >= 1000000) {
+    // Milhões: "2 M" ou "2.5 M"
+    const val = Math.round(amount / 100000) / 10;
+    return `${val % 1 === 0 ? val.toFixed(0) : val.toFixed(1)} M`;
+  } else if (amount >= 100000) {
+    // Centenas de milhar: "111 K", "259 K" (sem decimal)
+    return `${Math.round(amount / 1000)} K`;
+  } else {
+    // Unidades/dezenas de milhar: "1 K" ou "1.1 K"
+    const val = Math.round(amount / 100) / 10;
+    return `${val % 1 === 0 ? val.toFixed(0) : val.toFixed(1)} K`;
+  }
 }
 
 // Tipo para representar um dia com mês
 interface DayWithMonth {
   day: number;
-  month: 'abril' | 'mayo';
+  month: 'mes1' | 'mes2';
+}
+
+// Nomes dos meses em espanhol
+const MONTH_NAMES_ES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+// Gera as semanas de um mês (Seg=0 ... Dom=6)
+function buildWeeks(year: number, month: number): (number | null)[][] {
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDayOfWeek = (new Date(year, month, 1).getDay() + 6) % 7; // Mon=0
+  const weeks: (number | null)[][] = [];
+  let week: (number | null)[] = Array(firstDayOfWeek).fill(null);
+  for (let day = 1; day <= daysInMonth; day++) {
+    week.push(day);
+    if (week.length === 7) { weeks.push(week); week = []; }
+  }
+  if (week.length > 0) {
+    while (week.length < 7) week.push(null);
+    weeks.push(week);
+  }
+  return weeks;
 }
 
 function AreaTapeable() {
@@ -32,8 +68,8 @@ function DragIndicator() {
 function Title() {
   return (
     <div className="content-stretch flex items-center relative shrink-0 w-full" data-name="Title">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[#282834] text-[18px]" style={{ fontFeatureSettings: "'case'" }}>
-        <p className="css-4hzbpn leading-[22px]">Selecciona el día o periodo que quieres adelantar</p>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] font-bold justify-center leading-[0] min-h-px min-w-px not-italic relative text-[#282834] text-[20px]" style={{ fontFeatureSettings: "'case'", fontWeight: 700 }}>
+        <p className="css-4hzbpn leading-[24px]">Selecciona el día o periodo que quieres adelantar</p>
       </div>
     </div>
   );
@@ -129,7 +165,7 @@ function Mes({ title }: { title: string }) {
     <div className="relative shrink-0 w-full" data-name="Mes">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex items-center pb-[12px] pt-[20px] px-[12px] relative w-full">
-          <p className="css-ew64yg font-['Inter:Semi_Bold',sans-serif] leading-[18px] not-italic relative shrink-0 text-[#646587] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+          <p className="css-ew64yg font-['Inter',sans-serif] font-semibold leading-[18px] not-italic relative shrink-0 text-[#646587] text-[14px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
             {title}
           </p>
         </div>
@@ -141,7 +177,7 @@ function Mes({ title }: { title: string }) {
 function DayLabel({ label }: { label: string }) {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-h-px min-w-px py-[4px] relative" data-name="day">
-      <p className="css-4hzbpn font-['Inter:Regular',sans-serif] leading-[12px] not-italic relative shrink-0 text-[#646587] text-[10px] text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <p className="css-4hzbpn font-['Inter',sans-serif] leading-[12px] not-italic relative shrink-0 text-[#646587] text-[10px] text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         {label}
       </p>
     </div>
@@ -175,7 +211,7 @@ function InfoMes({ title }: { title: string }) {
 function DayUnavailable({ day }: { day: number }) {
   return (
     <div className="content-stretch flex flex-col items-start py-[8px] relative shrink-0 size-[48px]" data-name="day">
-      <p className="css-4hzbpn font-['Inter:Regular',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#9c9ebf] text-[12px] text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <p className="css-4hzbpn font-['Inter',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#9c9ebf] text-[12px] text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         {day}
       </p>
     </div>
@@ -205,7 +241,7 @@ function DayInRangeNoValue({ day, isStart, isEnd, isInRange }: { day: number; is
       className={`content-stretch flex flex-col items-start py-[8px] relative shrink-0 size-[48px] ${bgClasses} ${roundingClasses}`}
       data-name="day"
     >
-      <p className="css-4hzbpn font-['Inter:Regular',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#9c9ebf] text-[12px] text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <p className="css-4hzbpn font-['Inter',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#9c9ebf] text-[12px] text-center w-full" style={{ fontFeatureSettings: "'case'" }}>
         {day}
       </p>
     </div>
@@ -251,26 +287,26 @@ function DayAvailable({
   return (
     <div
       onClick={onClick}
-      className={`content-stretch flex flex-col font-['Inter:Regular',sans-serif] items-start justify-between not-italic py-[8px] relative shrink-0 size-[48px] text-center cursor-pointer hover:opacity-80 transition-opacity ${bgClasses} ${roundingClasses}`}
+      className={`content-stretch flex flex-col font-['Inter',sans-serif] items-start justify-between not-italic py-[8px] relative shrink-0 size-[48px] text-center cursor-pointer hover:opacity-80 transition-opacity ${bgClasses} ${roundingClasses}`}
       data-name="day"
     >
       <p className={`css-4hzbpn leading-[16px] relative shrink-0 text-[12px] w-full ${textColorClasses}`} style={{ fontFeatureSettings: "'case'" }}>
         {day}
       </p>
       <p className={`css-4hzbpn leading-[12px] relative shrink-0 text-[10px] w-full ${textColorClasses}`} style={{ fontFeatureSettings: "'case'" }}>
-        $ {amount} k
+        $ {formatAmount(amount)}
       </p>
     </div>
   );
 }
 
 // Componente para renderizar um dia genérico no calendário
-function DayCell({ day, month, dayValues, getDayStatus, onDayClick }: { 
-  day: number; 
-  month: 'abril' | 'mayo'; 
+function DayCell({ day, month, dayValues, getDayStatus, onDayClick }: {
+  day: number;
+  month: 'mes1' | 'mes2';
   dayValues: Record<string, number>;
-  getDayStatus: (day: number, month: 'abril' | 'mayo') => { isAvailable: boolean; isStart: boolean; isEnd: boolean; isInRange: boolean };
-  onDayClick: (day: number, month: 'abril' | 'mayo') => void;
+  getDayStatus: (day: number, month: 'mes1' | 'mes2') => { isAvailable: boolean; isStart: boolean; isEnd: boolean; isInRange: boolean };
+  onDayClick: (day: number, month: 'mes1' | 'mes2') => void;
 }) {
   const dayKey = `${month}-${day}`;
   const hasValue = dayValues[dayKey] !== undefined;
@@ -295,10 +331,10 @@ function DayCell({ day, month, dayValues, getDayStatus, onDayClick }: {
 // Semanas dinâmicas usando DayCell
 function WeekRow({ days, month, dayValues, getDayStatus, onDayClick }: {
   days: (number | null)[];
-  month: 'abril' | 'mayo';
+  month: 'mes1' | 'mes2';
   dayValues: Record<string, number>;
-  getDayStatus: (day: number, month: 'abril' | 'mayo') => { isAvailable: boolean; isStart: boolean; isEnd: boolean; isInRange: boolean };
-  onDayClick: (day: number, month: 'abril' | 'mayo') => void;
+  getDayStatus: (day: number, month: 'mes1' | 'mes2') => { isAvailable: boolean; isStart: boolean; isEnd: boolean; isInRange: boolean };
+  onDayClick: (day: number, month: 'mes1' | 'mes2') => void;
 }) {
   return (
     <div className="content-stretch flex items-end relative shrink-0" data-name="Semana">
@@ -320,73 +356,38 @@ function WeekRow({ days, month, dayValues, getDayStatus, onDayClick }: {
   );
 }
 
-function Component2Meses({ onDayClick, getDayStatus, dayValues, onScroll, hasScrolled }: { 
-  onDayClick: (day: number, month: 'abril' | 'mayo') => void; 
-  getDayStatus: (day: number, month: 'abril' | 'mayo') => { isAvailable: boolean; isStart: boolean; isEnd: boolean; isInRange: boolean }; 
-  dayValues: Record<string, number>; 
-  onScroll: (e: React.UIEvent<HTMLDivElement>) => void; 
-  hasScrolled: boolean 
+function Component2Meses({ onDayClick, getDayStatus, dayValues, onScroll, hasScrolled, mes1Label, mes2Label, mes1Weeks, mes2Weeks }: {
+  onDayClick: (day: number, month: 'mes1' | 'mes2') => void;
+  getDayStatus: (day: number, month: 'mes1' | 'mes2') => { isAvailable: boolean; isStart: boolean; isEnd: boolean; isInRange: boolean };
+  dayValues: Record<string, number>;
+  onScroll: (e: React.UIEvent<HTMLDivElement>) => void;
+  hasScrolled: boolean;
+  mes1Label: string;
+  mes2Label: string;
+  mes1Weeks: (number | null)[][];
+  mes2Weeks: (number | null)[][];
 }) {
-  // Definir as semanas de Abril (começando na quarta-feira, dia 3)
-  const abrilWeeks = [
-    [null, null, 3, 4, 5, 6, null], // Primeira semana (começa na quarta)
-    [7, 8, 9, 10, 11, 12, 13],
-    [14, 15, 16, 17, 18, 19, 20],
-    [21, 22, 23, 24, 25, 26, 27],
-    [28, 29, 30, null, null, null, null]
-  ];
-
-  // Definir as semanas de Mayo (começa na quinta-feira, dia 1)
-  const mayoWeeks = [
-    [null, null, null, 1, 2, 3, 4],
-    [5, 6, 7, 8, 9, 10, 11],
-    [12, 13, 14, 15, 16, 17, 18],
-    [19, 20, 21, 22, 23, 24, 25],
-    [26, 27, 28, 29, 30, 31, null]
-  ];
-
   return (
     <div className="relative flex-1 w-[360px] shrink-0 overflow-hidden">
-      {/* Sombra superior que aparece ao scrollar */}
-      <div 
+      <div
         className={`absolute top-0 left-0 right-0 h-[8px] pointer-events-none z-10 transition-opacity ${hasScrolled ? 'opacity-100' : 'opacity-0'}`}
-        style={{
-          background: 'linear-gradient(to bottom, rgba(40, 40, 52, 0.1) 0%, rgba(40, 40, 52, 0) 100%)'
-        }}
+        style={{ background: 'linear-gradient(to bottom, rgba(40, 40, 52, 0.1) 0%, rgba(40, 40, 52, 0) 100%)' }}
       />
-      
-      <div 
+      <div
         onScroll={onScroll}
-        className="content-stretch flex flex-col h-full items-center overflow-x-clip overflow-y-auto pt-[16px] w-[360px]" 
+        className="content-stretch flex flex-col h-full items-center overflow-x-clip overflow-y-auto pt-[16px] w-[360px]"
         data-name="2 meses"
       >
-        {/* Abril */}
         <div className="content-stretch flex flex-col gap-[16px] items-end relative shrink-0 w-[336px]" data-name="Mes">
-          <InfoMes title="Abril" />
-          {abrilWeeks.map((week, index) => (
-            <WeekRow 
-              key={`abril-week-${index}`}
-              days={week}
-              month="abril"
-              dayValues={dayValues}
-              getDayStatus={getDayStatus}
-              onDayClick={onDayClick}
-            />
+          <InfoMes title={mes1Label} />
+          {mes1Weeks.map((week, index) => (
+            <WeekRow key={`mes1-week-${index}`} days={week} month="mes1" dayValues={dayValues} getDayStatus={getDayStatus} onDayClick={onDayClick} />
           ))}
         </div>
-        
-        {/* Mayo */}
         <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-[336px]" data-name="Mes">
-          <InfoMes title="Mayo" />
-          {mayoWeeks.map((week, index) => (
-            <WeekRow 
-              key={`mayo-week-${index}`}
-              days={week}
-              month="mayo"
-              dayValues={dayValues}
-              getDayStatus={getDayStatus}
-              onDayClick={onDayClick}
-            />
+          <InfoMes title={mes2Label} />
+          {mes2Weeks.map((week, index) => (
+            <WeekRow key={`mes2-week-${index}`} days={week} month="mes2" dayValues={dayValues} getDayStatus={getDayStatus} onDayClick={onDayClick} />
           ))}
         </div>
       </div>
@@ -397,7 +398,7 @@ function Component2Meses({ onDayClick, getDayStatus, dayValues, onScroll, hasScr
 function IconLabel() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Icon & Label">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#9c9ebf] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#9c9ebf] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="css-ew64yg leading-[18px]">Seleccionar</p>
       </div>
     </div>
@@ -430,16 +431,16 @@ function CuentaWithSelection({ adelantas, costo, recibes, onSelect, isDisabled =
       <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full animate-[fadeIn_300ms_ease-in-out]">
         {/* Adelantas */}
         <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
-          <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
             <p className="css-ew64yg leading-[18px]">Adelantas</p>
           </div>
           <div className="content-stretch flex items-baseline relative shrink-0">
             <div className="content-stretch flex gap-[2px] items-baseline relative shrink-0">
-              <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+              <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-ew64yg leading-[18px]">$</p>
               </div>
               <div className="content-stretch flex items-baseline relative shrink-0">
-                <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+                <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                   <p className="css-ew64yg leading-[18px]">{formatNumber(adelantas)}</p>
                 </div>
               </div>
@@ -451,10 +452,10 @@ function CuentaWithSelection({ adelantas, costo, recibes, onSelect, isDisabled =
         <div className="content-stretch flex items-end justify-between relative shrink-0 w-full">
           <div className="flex flex-row items-end self-stretch">
             <div className="content-stretch flex gap-[4px] h-full items-center relative shrink-0">
-              <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+              <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-ew64yg leading-[18px]">Costo</p>
               </div>
-              <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+              <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-ew64yg leading-[18px]">3,24%</p>
               </div>
               <div className="relative shrink-0 size-[16px]">
@@ -472,14 +473,14 @@ function CuentaWithSelection({ adelantas, costo, recibes, onSelect, isDisabled =
           </div>
           <div className="content-stretch flex items-baseline relative shrink-0">
             <div className="content-stretch flex gap-[2px] items-baseline justify-center relative shrink-0">
-              <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+              <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-ew64yg leading-[18px]">-</p>
               </div>
-              <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+              <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-ew64yg leading-[18px]">$</p>
               </div>
               <div className="content-stretch flex items-baseline relative shrink-0">
-                <div className="css-g0mm18 flex flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+                <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                   <p className="css-ew64yg leading-[18px]">{formatNumber(costo)}</p>
                 </div>
               </div>
@@ -489,16 +490,16 @@ function CuentaWithSelection({ adelantas, costo, recibes, onSelect, isDisabled =
 
         {/* Recibes */}
         <div className="content-stretch flex items-end justify-between relative shrink-0 w-full">
-          <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
             <p className="css-ew64yg leading-[18px]">Recibes</p>
           </div>
           <div className="content-stretch flex items-baseline relative shrink-0">
             <div className="content-stretch flex gap-[2px] items-baseline relative shrink-0">
-              <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+              <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-ew64yg leading-[18px]">$</p>
               </div>
               <div className="content-stretch flex items-baseline relative shrink-0">
-                <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+                <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
                   <p className="css-ew64yg leading-[18px]">{formatNumber(recibes)}</p>
                 </div>
               </div>
@@ -519,7 +520,7 @@ function CuentaWithSelection({ adelantas, costo, recibes, onSelect, isDisabled =
         <div className="flex flex-row items-center justify-center max-h-[inherit] min-h-[inherit] size-full">
           <div className="content-stretch flex items-center justify-center max-h-[inherit] min-h-[inherit] px-[16px] py-[2px] relative size-full">
             <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-              <div className={`css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] ${
+              <div className={`css-g0mm18 flex flex-col font-['Inter',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] ${
                 isDisabled ? 'text-[#9c9ebf]' : 'text-white'
               }`} style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-ew64yg leading-[18px]">Seleccionar</p>
@@ -532,61 +533,91 @@ function CuentaWithSelection({ adelantas, costo, recibes, onSelect, isDisabled =
   );
 }
 
-export default function BottomSheetNoModal({ onDismiss, onSelect, initialSelection }: { 
-  onDismiss?: () => void; 
-  onSelect?: (adelantas: number, costo: number, recibes: number, startDay: number, endDay: number) => void; 
-  initialSelection?: { startDay: number; endDay: number } | null 
+export default function BottomSheetNoModal({ onDismiss, onSelect, initialSelection, totalDisponible = 50000000 }: {
+  onDismiss?: () => void;
+  onSelect?: (adelantas: number, costo: number, recibes: number, startDay: number, endDay: number) => void;
+  initialSelection?: { startDay: number; endDay: number } | null;
+  totalDisponible?: number;
 }) {
   const [startDate, setStartDate] = useState<DayWithMonth | null>(
-    initialSelection?.startDay ? { day: initialSelection.startDay, month: 'abril' } : null
+    initialSelection?.startDay
+      ? { day: initialSelection.startDay >= 100 ? initialSelection.startDay - 100 : initialSelection.startDay, month: initialSelection.startDay >= 100 ? 'mes2' : 'mes1' }
+      : null
   );
   const [endDate, setEndDate] = useState<DayWithMonth | null>(
-    initialSelection?.endDay ? { day: initialSelection.endDay, month: 'abril' } : null
+    initialSelection?.endDay
+      ? { day: initialSelection.endDay >= 100 ? initialSelection.endDay - 100 : initialSelection.endDay, month: initialSelection.endDay >= 100 ? 'mes2' : 'mes1' }
+      : null
   );
   const [hasScrolled, setHasScrolled] = useState(false);
 
-  // Valores aleatórios para cada dia disponível (em miles de pesos)
-  // Formato: "mes-dia": valor
+  // Calcular os 2 meses a exibir: mês atual +2 e +3
+  const now = new Date();
+  const mes1Date = new Date(now.getFullYear(), now.getMonth() + 2, 1);
+  const mes2Date = new Date(now.getFullYear(), now.getMonth() + 3, 1);
+  const mes1Label = MONTH_NAMES_ES[mes1Date.getMonth()];
+  const mes2Label = MONTH_NAMES_ES[mes2Date.getMonth()];
+  const mes1Weeks = buildWeeks(mes1Date.getFullYear(), mes1Date.getMonth());
+  const mes2Weeks = buildWeeks(mes2Date.getFullYear(), mes2Date.getMonth());
+  const mes1Days = new Date(mes1Date.getFullYear(), mes1Date.getMonth() + 1, 0).getDate();
+  const mes2Days = new Date(mes2Date.getFullYear(), mes2Date.getMonth() + 1, 0).getDate();
+
+  // Pesos relativos por dia disponível (os dias que têm dinheiro liberável)
   const dayValues: Record<string, number> = {
-    // Abril
-    'abril-3': 847,
-    'abril-4': 623,
-    'abril-5': 991,
-    'abril-6': 754,
-    'abril-7': 489,
-    'abril-8': 812,
-    'abril-9': 567,
-    'abril-10': 934,
-    'abril-11': 421,
-    'abril-12': 678,
-    'abril-13': 856,
-    'abril-14': 392,
-    'abril-19': 745,
-    'abril-28': 519,
-    'abril-29': 883,
-    // Mayo
-    'mayo-3': 612,
-    'mayo-5': 789,
-    'mayo-6': 534,
-    'mayo-7': 891,
-    'mayo-8': 467,
-    'mayo-9': 723,
-    'mayo-10': 895,
-    'mayo-12': 641,
-    'mayo-13': 778,
-    'mayo-14': 502,
-    'mayo-19': 834,
+    // Mes 1
+    'mes1-3': 847,
+    'mes1-4': 623,
+    'mes1-5': 991,
+    'mes1-6': 754,
+    'mes1-7': 80,
+    'mes1-8': 812,
+    'mes1-9': 567,
+    'mes1-10': 934,
+    'mes1-11': 110,
+    'mes1-12': 678,
+    'mes1-13': 856,
+    'mes1-14': 60,
+    'mes1-19': 745,
+    'mes1-28': 519,
+    'mes1-29': 883,
+    // Mes 2
+    'mes2-3': 612,
+    'mes2-5': 789,
+    'mes2-6': 534,
+    'mes2-7': 891,
+    'mes2-8': 90,
+    'mes2-9': 723,
+    'mes2-10': 895,
+    'mes2-12': 641,
+    'mes2-13': 778,
+    'mes2-14': 140,
+    'mes2-19': 834,
   };
+
+  // Escalar os valores para que a soma total seja exatamente igual ao totalDisponible
+  const totalRawValues = Object.values(dayValues).reduce((sum, v) => sum + v, 0);
+  const scaledDayValues: Record<string, number> = {};
+  const dayEntries = Object.entries(dayValues);
+  let runningSum = 0;
+  dayEntries.forEach(([key, val], index) => {
+    if (index === dayEntries.length - 1) {
+      // Último dia: ajusta para que a soma seja exatamente totalDisponible
+      scaledDayValues[key] = totalDisponible - runningSum;
+    } else {
+      scaledDayValues[key] = Math.round(val / totalRawValues * totalDisponible);
+      runningSum += scaledDayValues[key];
+    }
+  });
 
   // Converter data para número único para comparação (dia + 100*mês_index)
   const dateToNumber = (date: DayWithMonth): number => {
-    const monthOffset = date.month === 'mayo' ? 100 : 0;
+    const monthOffset = date.month === 'mes2' ? 100 : 0;
     return date.day + monthOffset;
   };
 
-  const handleDayClick = (day: number, month: 'abril' | 'mayo') => {
+  const handleDayClick = (day: number, month: 'mes1' | 'mes2') => {
     const dayKey = `${month}-${day}`;
-    if (!dayValues[dayKey]) return; // Só permite clicar em dias com valor
+    if (!scaledDayValues[dayKey]) return; // Só permite clicar em dias com valor
 
     const clickedDate: DayWithMonth = { day, month };
     const clickedNum = dateToNumber(clickedDate);
@@ -611,7 +642,7 @@ export default function BottomSheetNoModal({ onDismiss, onSelect, initialSelecti
     }
   };
 
-  const isDayInRange = (day: number, month: 'abril' | 'mayo'): boolean => {
+  const isDayInRange = (day: number, month: 'mes1' | 'mes2'): boolean => {
     if (!startDate || !endDate) return false;
     
     const dayNum = dateToNumber({ day, month });
@@ -621,9 +652,9 @@ export default function BottomSheetNoModal({ onDismiss, onSelect, initialSelecti
     return dayNum >= startNum && dayNum <= endNum;
   };
 
-  const getDayStatus = (day: number, month: 'abril' | 'mayo') => {
+  const getDayStatus = (day: number, month: 'mes1' | 'mes2') => {
     const dayKey = `${month}-${day}`;
-    const isAvailable = dayValues[dayKey] !== undefined;
+    const isAvailable = scaledDayValues[dayKey] !== undefined;
     const isStart = startDate ? startDate.day === day && startDate.month === month : false;
     const isEnd = endDate ? endDate.day === day && endDate.month === month : false;
     const isInRange = isDayInRange(day, month);
@@ -640,26 +671,26 @@ export default function BottomSheetNoModal({ onDismiss, onSelect, initialSelecti
     
     // Iterar sobre todos os dias possíveis no range
     for (let num = startNum; num <= endNum; num++) {
-      let day: number, month: 'abril' | 'mayo';
-      
+      let day: number, month: 'mes1' | 'mes2';
+
       if (num >= 100) {
-        month = 'mayo';
+        month = 'mes2';
         day = num - 100;
       } else {
-        month = 'abril';
+        month = 'mes1';
         day = num;
       }
       
       // Verificar se o dia existe no mês
-      if (month === 'abril' && day <= 30 && day >= 1) {
-        const dayKey = `abril-${day}`;
-        if (dayValues[dayKey]) {
-          total += dayValues[dayKey];
+      if (month === 'mes1' && day <= mes1Days && day >= 1) {
+        const dayKey = `mes1-${day}`;
+        if (scaledDayValues[dayKey]) {
+          total += scaledDayValues[dayKey];
         }
-      } else if (month === 'mayo' && day <= 31 && day >= 1) {
-        const dayKey = `mayo-${day}`;
-        if (dayValues[dayKey]) {
-          total += dayValues[dayKey];
+      } else if (month === 'mes2' && day <= mes2Days && day >= 1) {
+        const dayKey = `mes2-${day}`;
+        if (scaledDayValues[dayKey]) {
+          total += scaledDayValues[dayKey];
         }
       }
     }
@@ -673,25 +704,29 @@ export default function BottomSheetNoModal({ onDismiss, onSelect, initialSelecti
   const hasSelection = startDate !== null && endDate !== null;
 
   // Verifica se a seleção mudou em relação à inicial
-  const hasSelectionChanged = initialSelection 
-    ? (startDate?.day !== initialSelection.startDay || endDate?.day !== initialSelection.endDay)
+  const hasSelectionChanged = initialSelection
+    ? (dateToNumber(startDate ?? { day: 0, month: 'mes1' }) !== initialSelection.startDay || dateToNumber(endDate ?? { day: 0, month: 'mes1' }) !== initialSelection.endDay)
     : hasSelection;
 
   const handleSelect = () => {
     if (hasSelectionChanged && onSelect && startDate && endDate) {
-      onSelect(selectedTotal, cost, receive, startDate.day, endDate.day);
+      onSelect(selectedTotal, cost, receive, dateToNumber(startDate), dateToNumber(endDate));
     }
   };
 
   return (
     <div className="bg-white flex flex-col items-start overflow-clip relative rounded-tl-[20px] rounded-tr-[20px] shadow-[0px_-2px_4px_0px_rgba(40,40,52,0.1)] w-[360px] h-[720px]" data-name="Bottom sheet no modal">
       <Header1 onDismiss={onDismiss} />
-      <Component2Meses 
-        onDayClick={handleDayClick} 
-        getDayStatus={getDayStatus} 
-        dayValues={dayValues} 
-        onScroll={(e) => setHasScrolled(e.currentTarget.scrollTop > 0)} 
-        hasScrolled={hasScrolled} 
+      <Component2Meses
+        onDayClick={handleDayClick}
+        getDayStatus={getDayStatus}
+        dayValues={scaledDayValues}
+        onScroll={(e) => setHasScrolled(e.currentTarget.scrollTop > 0)}
+        hasScrolled={hasScrolled}
+        mes1Label={mes1Label}
+        mes2Label={mes2Label}
+        mes1Weeks={mes1Weeks}
+        mes2Weeks={mes2Weeks}
       />
       {hasSelection ? (
         <CuentaWithSelection

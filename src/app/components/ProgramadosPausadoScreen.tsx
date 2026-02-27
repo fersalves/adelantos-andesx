@@ -58,7 +58,7 @@ function StatusBarAndroid() {
     <div className="h-[52px] relative shrink-0 w-full" data-name="Status bar android">
       <div className="flex flex-row items-end size-full">
         <div className="content-stretch flex items-end justify-between leading-[0] px-[24px] py-[10px] relative size-full">
-          <div className="css-g0mm18 flex flex-col font-['Roboto:Medium',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
             <p className="css-ew64yg leading-[20px]">12:30</p>
           </div>
           <RightIcons />
@@ -125,7 +125,7 @@ function Header({ onBackClick }: { onBackClick?: () => void }) {
           <div className="content-stretch flex gap-[8px] items-start min-w-[40px] relative shrink-0">
             <BackButton onClick={onBackClick} />
           </div>
-          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Inter:Bold',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[16px] text-center text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[16px] text-center text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
             <p className="css-g0mm18 leading-[20px] overflow-hidden">&nbsp;</p>
           </div>
           <div className="content-stretch flex gap-[8px] items-center justify-end max-h-[40px] relative shrink-0">
@@ -142,8 +142,8 @@ function Title() {
     <div className="relative shrink-0 w-full" data-name="Title">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex items-center justify-between px-[16px] py-[8px] relative w-full">
-          <p className="css-4hzbpn flex-[1_0_0] font-['Inter:Bold',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
-            Tu adelanto recurrente
+          <p className="css-4hzbpn flex-[1_0_0] font-bold font-['Inter',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontWeight: 700, fontFeatureSettings: "'case'" }}>
+            Modifica tu adelanto recurrente
           </p>
         </div>
       </div>
@@ -154,7 +154,7 @@ function Title() {
 function Label() {
   return (
     <div className="content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px relative" data-name="Label">
-      <p className="css-4hzbpn flex-[1_0_0] font-['Inter:Regular',sans-serif] leading-[18px] min-h-px min-w-px not-italic relative text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
+      <p className="css-4hzbpn flex-[1_0_0] font-['Inter',sans-serif] leading-[18px] min-h-px min-w-px not-italic relative text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'" }}>
         Puedes modificar la frecuencia si lo necesitas.
       </p>
     </div>
@@ -176,44 +176,38 @@ function Subtitulo() {
 }
 
 // Frequency Selectors
-function FrequencyButton({ 
-  label, 
-  isSelected, 
-  onClick 
-}: { 
-  label: string; 
-  isSelected: boolean; 
+function FrequencyButton({
+  label,
+  isSelected,
+  onClick
+}: {
+  label: string;
+  isSelected: boolean;
   onClick: () => void;
 }) {
   return (
-    <div 
+    <div
       onClick={onClick}
-      className={`flex-[1_0_0] min-h-[32px] min-w-[32px] relative rounded-[12px] cursor-pointer ${isSelected ? 'bg-white' : 'bg-white'}`}
+      className="bg-white flex-[1_0_0] h-[56px] min-w-[32px] relative rounded-[12px] cursor-pointer hover:bg-gray-50 transition-colors"
     >
-      <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-[inherit] overflow-clip relative rounded-[inherit] w-full">
-        <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px px-0 py-[12px] relative rounded-[8px]">
-          <div className="content-stretch flex items-start pb-0 pl-[12px] pr-0 pt-[12px] relative shrink-0">
-            <div className="shrink-0 size-0" />
-          </div>
+      <div className="content-stretch flex items-center justify-center h-full overflow-clip relative rounded-[inherit] w-full">
+        <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px p-[12px] relative rounded-[8px]">
           <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start min-h-px min-w-px relative">
             <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full">
-              <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
+              <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
                 <p className="css-4hzbpn leading-[16px]">{label}</p>
               </div>
             </div>
           </div>
-          <div className="content-stretch flex items-start pb-0 pl-[12px] pr-0 pt-[12px] relative shrink-0">
-            <div className="shrink-0 size-0" />
-          </div>
         </div>
       </div>
-      <div 
-        aria-hidden="true" 
+      <div
+        aria-hidden="true"
         className={`absolute border ${
-          isSelected 
-            ? 'border-2 border-[#434ce4] border-solid inset-0 pointer-events-none rounded-[12px] shadow-[0px_0px_0px_2px_#dee9ff]' 
+          isSelected
+            ? 'border-2 border-[#434ce4] border-solid inset-0 pointer-events-none rounded-[12px] shadow-[0px_0px_0px_2px_#dee9ff]'
             : 'border border-[#8788ab] border-solid inset-0 pointer-events-none rounded-[12px]'
-        }`} 
+        }`}
       />
     </div>
   );
@@ -267,7 +261,7 @@ function DayButton({
     >
       <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-[inherit] overflow-clip relative rounded-[inherit] w-full">
         <div className="flex-[1_0_0] h-[32px] min-h-px min-w-px relative">
-          <div className="absolute flex flex-col font-['Inter:Regular',sans-serif] inset-0 justify-center leading-[0] not-italic text-[12px] text-black text-center" style={{ fontFeatureSettings: "'case'" }}>
+          <div className="absolute flex flex-col font-['Inter',sans-serif] inset-0 justify-center leading-[0] not-italic text-[12px] text-black text-center" style={{ fontFeatureSettings: "'case'" }}>
             <p className="leading-[16px] whitespace-pre-wrap">{label}</p>
           </div>
         </div>
@@ -312,7 +306,7 @@ function DayContainer({ selectedDay, onDayChange }: { selectedDay: string; onDay
 function DaySelector({ selectedDay, onDayChange }: { selectedDay: string; onDayChange: (day: string) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black w-full" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[12px] text-black w-full" style={{ fontFeatureSettings: "'case'" }}>
         <p className="leading-[16px] whitespace-pre-wrap">Selecciona el día</p>
       </div>
       <DayContainer selectedDay={selectedDay} onDayChange={onDayChange} />
@@ -329,7 +323,7 @@ function BadgePill() {
           <div className="bg-[#d74009] rounded-[9999px] size-full" />
         </div>
       </div>
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[10px] text-center text-white" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[10px] text-center text-white" style={{ fontFeatureSettings: "'case'" }}>
         <p className="leading-[12px] whitespace-pre-wrap">En pausa</p>
       </div>
     </div>
@@ -383,10 +377,10 @@ function InfoCardTitleRow({ frequencyText }: { frequencyText: string }) {
 
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
         <p className="text-[12px] whitespace-pre-wrap">
           <span className="leading-[16px]">{prefix}</span>
-          <span className="font-['Inter:Semi_Bold',sans-serif] leading-[16px] not-italic" style={{ fontFeatureSettings: "'case'" }}>
+          <span className="font-['Inter',sans-serif] leading-[16px] not-italic" style={{ fontFeatureSettings: "'case'" }}>
             {bold}
           </span>
           <span className="leading-[16px]">{suffix}</span>
@@ -431,23 +425,23 @@ function InfoCard({ frequencyText }: { frequencyText: string }) {
 function TitleRow() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
-        <p className="text-[12px] whitespace-pre-wrap">
-          <span className="leading-[16px]">{`El costo varía entre el 0,35% y 13,50%. `}</span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter:Semi_Bold',sans-serif] leading-[16px] not-italic text-[#434ce4] underline cursor-pointer" style={{ fontFeatureSettings: "'case'" }}>
-            Conoce cómo se calcula
-          </span>
-          <span className="leading-[16px]">
-            {`. `}
-            <br aria-hidden="true" />
-            <br aria-hidden="true" />
-            {`Al confirmar, aceptas los `}
-          </span>
-          <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter:Semi_Bold',sans-serif] leading-[16px] not-italic text-[#434ce4] underline cursor-pointer" style={{ fontFeatureSettings: "'case'" }}>
-            Términos y condiciones
-          </span>
-          <span className="leading-[16px]">.</span>
-        </p>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative self-stretch text-[#282834] text-[0px]" style={{ fontFeatureSettings: "'case'" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <p className="text-[12px] leading-[16px]">
+            <span>{`El costo puede variar entre el 0,35% y 13,50%. `}</span>
+            <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter',sans-serif] not-italic text-[#434ce4] underline cursor-pointer" style={{ fontFeatureSettings: "'case'" }}>
+              Conoce cómo se calcula
+            </span>
+            <span>.</span>
+          </p>
+          <p className="text-[12px] leading-[16px]">
+            <span>{`Al confirmar, aceptas los `}</span>
+            <span className="[text-decoration-skip-ink:none] decoration-solid font-['Inter',sans-serif] not-italic text-[#434ce4] underline cursor-pointer" style={{ fontFeatureSettings: "'case'" }}>
+              Términos y condiciones
+            </span>
+            <span>.</span>
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -463,7 +457,7 @@ function FooterContent() {
 
 function ListRow() {
   return (
-    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px py-[12px] relative rounded-[8px]" data-name="List row">
+    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px py-[16px] relative rounded-[8px]" data-name="List row">
       <div className="content-stretch flex items-start pl-[12px] pt-[12px] relative shrink-0">
         <div className="shrink-0 size-0" />
       </div>
@@ -506,7 +500,7 @@ function SlotContainerVPaddings() {
 function IconLabel({ disabled }: { disabled: boolean }) {
   return (
     <div className="content-stretch flex gap-[8px] items-center justify-center relative shrink-0" data-name="Icon & Label">
-      <div className={`flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic overflow-hidden relative shrink-0 ${disabled ? 'text-[#a6b0ff]' : 'text-[#434ce4]'} text-[14px] text-ellipsis whitespace-nowrap`} style={{ fontFeatureSettings: "'case'" }}>
+      <div className={`flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic overflow-hidden relative shrink-0 ${disabled ? 'text-[#a6b0ff]' : 'text-[#434ce4]'} text-[14px] text-ellipsis whitespace-nowrap`} style={{ fontFeatureSettings: "'case'" }}>
         <p className="leading-[18px] overflow-hidden">{`Encender `}</p>
       </div>
     </div>
@@ -561,46 +555,33 @@ function FixedFooter({ disabled, onClick }: { disabled: boolean; onClick?: () =>
 interface ProgramadosPausadoScreenProps {
   onBackClick?: () => void;
   onReactivarClick?: (frequencyType: string, selectedDay?: string) => void;
+  onFrequencyChangeFromPaused?: (frequencyType: string, selectedDay?: string) => void;
   initialFrequency?: { type: string; selectedDay?: string };
 }
 
-export function ProgramadosPausadoScreen({ 
+export function ProgramadosPausadoScreen({
   onBackClick,
   onReactivarClick,
+  onFrequencyChangeFromPaused,
   initialFrequency
 }: ProgramadosPausadoScreenProps) {
   const [selectedFrequency, setSelectedFrequency] = useState(initialFrequency?.type || "todos-dias");
   const [selectedDay, setSelectedDay] = useState(initialFrequency?.selectedDay || "lun");
-  const [hasChanged, setHasChanged] = useState(false);
 
   const handleFrequencyChange = (freq: string) => {
     setSelectedFrequency(freq);
-    // Se mudou da frequência inicial, habilitar o botão
     if (freq !== initialFrequency?.type) {
-      setHasChanged(true);
-    } else if (freq === "semanal" && selectedDay !== initialFrequency?.selectedDay) {
-      // Se voltou para a mesma frequência mas o dia é diferente
-      setHasChanged(true);
-    } else {
-      setHasChanged(false);
+      onFrequencyChangeFromPaused?.(freq, selectedDay);
     }
   };
 
   const handleDayChange = (day: string) => {
     setSelectedDay(day);
-    // Se mudou do dia inicial, habilitar o botão
-    if (day !== initialFrequency?.selectedDay) {
-      setHasChanged(true);
-    } else if (selectedFrequency !== initialFrequency?.type) {
-      // Se o dia voltou ao original mas a frequência é diferente
-      setHasChanged(true);
-    } else {
-      setHasChanged(false);
-    }
+    onFrequencyChangeFromPaused?.(selectedFrequency, day);
   };
 
   const handleReactivar = () => {
-    if (hasChanged && onReactivarClick) {
+    if (onReactivarClick) {
       onReactivarClick(selectedFrequency, selectedDay);
     }
   };
@@ -634,7 +615,6 @@ export function ProgramadosPausadoScreen({
             <Header onBackClick={onBackClick} />
             <Title />
           </div>
-          <Subtitulo />
         </div>
 
         {/* Content */}
@@ -647,7 +627,7 @@ export function ProgramadosPausadoScreen({
         </div>
 
         {/* Footer - fora do padding */}
-        <FixedFooter disabled={!hasChanged} onClick={handleReactivar} />
+        <FixedFooter disabled={false} onClick={handleReactivar} />
       </div>
       <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-[-1px] pointer-events-none rounded-[17px]" />
     </div>

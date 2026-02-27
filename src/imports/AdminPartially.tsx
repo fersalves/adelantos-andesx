@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
+import { useAdminActions } from "@/app/contexts/AdminContext";
 import svgPaths from "./svg-qu5qau7y3t";
 import Popover from "./Popover";
+
+const TotalDisponibleCtx = createContext(30000000);
+
 
 function Wifi() {
   return (
@@ -58,7 +62,7 @@ function StatusBarAndroid() {
     <div className="h-[52px] relative shrink-0 w-full" data-name="Status bar android">
       <div className="flex flex-row items-end size-full">
         <div className="content-stretch flex items-end justify-between leading-[0] px-[24px] py-[10px] relative size-full">
-          <div className="css-g0mm18 flex flex-col font-['Roboto:Medium',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
+          <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-medium justify-center relative shrink-0 text-[#282834] text-[14px] tracking-[0.14px]" style={{ fontVariationSettings: "'wdth' 100", fontFeatureSettings: "'ss02', 'dlig', 'lnum', 'pnum'" }}>
             <p className="css-ew64yg leading-[20px]">12:30</p>
           </div>
           <RightIcons />
@@ -113,8 +117,9 @@ function History() {
 }
 
 function IconButton() {
+  const { onHistorialClick } = useAdminActions();
   return (
-    <div className="bg-[#e9f1ff] content-stretch flex items-center justify-center max-h-[40px] min-h-[40px] px-0 py-[2px] relative rounded-[12px] shrink-0 size-[40px]" data-name="Icon button">
+    <div onClick={onHistorialClick} className="bg-[#e9f1ff] content-stretch flex items-center justify-center max-h-[40px] min-h-[40px] px-0 py-[2px] relative rounded-[12px] shrink-0 size-[40px] cursor-pointer" data-name="Icon button">
       <History />
     </div>
   );
@@ -179,7 +184,7 @@ function Title() {
     <div className="relative shrink-0 w-full" data-name="Title">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex items-center justify-between px-[16px] py-[8px] relative w-full">
-          <p className="css-4hzbpn flex-[1_0_0] font-['Inter:Bold',sans-serif] leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+          <p className="css-4hzbpn flex-[1_0_0] font-['Inter',sans-serif] font-bold leading-[28px] min-h-px min-w-px not-italic overflow-hidden relative text-[#282834] text-[24px] text-ellipsis" style={{ fontFeatureSettings: "'case'", fontWeight: 700 }}>
             Adelanto disponible
           </p>
         </div>
@@ -207,10 +212,12 @@ function Frame1() {
 }
 
 function Amount() {
+  const total = useContext(TotalDisponibleCtx);
+  const formatted = total.toLocaleString("es-AR", { maximumFractionDigits: 0 });
   return (
     <div className="content-stretch flex items-baseline relative shrink-0" data-name="Amount">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'" }}>
-        <p className="css-ew64yg leading-[34px]">30.000.000</p>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
+        <p className="css-ew64yg leading-[34px]">{formatted}</p>
       </div>
     </div>
   );
@@ -219,7 +226,7 @@ function Amount() {
 function MoneyConfig() {
   return (
     <div className="content-stretch flex gap-[6px] items-baseline relative shrink-0" data-name="Money config.">
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#282834] text-[28px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[34px]">$</p>
       </div>
       <Amount />
@@ -255,7 +262,7 @@ function IconButton2({ onClick }: { onClick: () => void }) {
   return (
     <div
       onClick={onClick}
-      className="bg-[rgba(255,255,255,0)] content-stretch flex items-center justify-center max-h-[40px] min-h-[40px] px-0 py-[2px] relative rounded-[12px] shrink-0 size-[40px] cursor-pointer"
+      className="content-stretch flex items-center relative shrink-0 cursor-pointer"
       data-name="Icon button"
     >
       <Info />
@@ -291,7 +298,7 @@ function Textlink({ onClick }: { onClick?: () => void }) {
       className="content-stretch flex gap-[4px] items-center relative shrink-0 cursor-pointer"
       data-name="Textlink"
     >
-      <div className="css-g0mm18 flex flex-col font-['Inter:Semi_Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[16px]" style={{ fontFeatureSettings: "'case'" }}>
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#434ce4] text-[16px]" style={{ fontFeatureSettings: "'case'", fontWeight: 600 }}>
         <p className="css-ew64yg leading-[20px]">Adelantar</p>
       </div>
       <ArrowRight />
@@ -314,7 +321,7 @@ function Ignore() {
 
 function PaddingLeft() {
   return (
-    <div className="content-stretch flex items-start pb-0 pl-[12px] pr-0 pt-[12px] relative shrink-0" data-name="Padding left">
+    <div className="content-stretch flex items-start pb-0 pl-[16px] pr-0 pt-[12px] relative shrink-0" data-name="Padding left">
       <Ignore />
     </div>
   );
@@ -322,7 +329,7 @@ function PaddingLeft() {
 
 function RecurringPayments() {
   return (
-    <div className="relative shrink-0 size-[16px]" data-name="Recurring payments">
+    <div className="relative shrink-0 size-[20px]" data-name="Recurring payments">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
         <g id="Recurring payments">
           <g id="Vector">
@@ -339,8 +346,8 @@ function RecurringPayments() {
 function TitleRow() {
   return (
     <div className="content-stretch flex gap-[8px] items-start relative shrink-0 w-full" data-name="Title row">
-      <div className="flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[#282834] text-[12px]" style={{ fontFeatureSettings: "'case'" }}>
-        <p className="css-4hzbpn leading-[16px]">Programar adelanto recurrente</p>
+      <div className="flex flex-[1_0_0] flex-col font-['Inter',sans-serif] justify-center leading-[0] min-h-px min-w-px not-italic relative text-[#282834] text-[14px]" style={{ fontFeatureSettings: "'case'", fontWeight: 400 }}>
+        <p className="css-4hzbpn leading-[18px]">Programar adelanto recurrente</p>
       </div>
     </div>
   );
@@ -356,7 +363,7 @@ function MainContent() {
 
 function Content() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-start min-h-px min-w-px relative" data-name="Content">
+    <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Content">
       <RecurringPayments />
       <MainContent />
     </div>
@@ -365,7 +372,7 @@ function Content() {
 
 function ChevronRight() {
   return (
-    <div className="relative shrink-0 size-[16px]" data-name="Chevron right">
+    <div className="relative shrink-0 size-[20px]" data-name="Chevron right">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
         <g id="Chevron right">
           <path d={svgPaths.p2bd42b00} fill="var(--fill-0, #434CE4)" id="Vector" />
@@ -377,7 +384,7 @@ function ChevronRight() {
 
 function Row() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-start min-h-px min-w-px relative" data-name="Row">
+    <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-h-px min-w-px relative" data-name="Row">
       <Content />
       <ChevronRight />
     </div>
@@ -390,7 +397,7 @@ function Ignore1() {
 
 function PaddingRight() {
   return (
-    <div className="content-stretch flex items-start pb-0 pl-[12px] pr-0 pt-[12px] relative shrink-0" data-name="Padding right">
+    <div className="content-stretch flex items-start pb-0 pl-[16px] pr-0 pt-[12px] relative shrink-0" data-name="Padding right">
       <Ignore1 />
     </div>
   );
@@ -471,7 +478,7 @@ function ImageSm() {
 function Content2() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Content">
-      <p className="css-4hzbpn font-['Inter:regular',sans-serif] leading-[18px] max-h-[36px] not-italic overflow-hidden relative shrink-0 text-[#252537] text-[14px] text-ellipsis w-full">Obtén hasta $ 1.500.000 y devuélvelo en 7, 14, 21 o 28 días.</p>
+      <p className="css-4hzbpn font-['Inter',sans-serif] leading-[18px] max-h-[36px] not-italic overflow-hidden relative shrink-0 text-[#252537] text-[14px] text-ellipsis w-full">Obtén hasta $ 1.500.000 y devuélvelo en 7, 14, 21 o 28 días.</p>
     </div>
   );
 }
@@ -491,7 +498,7 @@ function ArrowRight1() {
 function TextLink() {
   return (
     <div className="content-stretch flex gap-[4px] items-center justify-center relative shrink-0" data-name="Text Link">
-      <div className="css-g0mm18 flex flex-col font-['Inter:semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[#4850e5] text-[14px] text-right">
+      <div className="css-g0mm18 flex flex-col font-['Inter',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[#4850e5] text-[14px] text-right" style={{ fontWeight: 600 }}>
         <p className="css-ew64yg leading-[18px]">Obtener Dinero Express</p>
       </div>
       <ArrowRight1 />
@@ -541,8 +548,8 @@ function ListRowSimple() {
 function Card1() {
   return (
     <div className="bg-white content-stretch flex flex-col items-start p-[16px] relative rounded-[20px] shrink-0 w-[328px]" data-name="Card 1 ↴">
-      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[20px]" />
       <ListRowSimple />
+      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-0 pointer-events-none rounded-[20px]" />
     </div>
   );
 }
@@ -574,7 +581,7 @@ function CardSection() {
 function Cross() {
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-name="cross">
-      <p className="css-ew64yg font-['Inter:Bold',sans-serif] leading-[22px] not-italic overflow-hidden relative shrink-0 text-[#282834] text-[18px] text-ellipsis" style={{ fontFeatureSettings: "'case'" }}>
+      <p className="css-ew64yg font-['Inter',sans-serif] font-bold leading-[22px] not-italic overflow-hidden relative shrink-0 text-[#282834] text-[18px] text-ellipsis" style={{ fontFeatureSettings: "'case'", fontWeight: 700 }}>
         ¿Necesitas más dinero?
       </p>
       <CardSection />
@@ -594,7 +601,7 @@ function Frame({ onInfoClick, onAdelantarClick, onProgramarClick }: { onInfoClic
   );
 }
 
-export default function AdminPartially({ onAdelantarClick, onProgramarClick }: { onAdelantarClick?: () => void; onProgramarClick?: () => void }) {
+export default function AdminPartially({ onAdelantarClick, onProgramarClick, totalDisponible }: { onAdelantarClick?: () => void; onProgramarClick?: () => void; totalDisponible?: number }) {
   const [showPopover, setShowPopover] = useState(false);
 
   const handleInfoClick = () => {
@@ -602,17 +609,19 @@ export default function AdminPartially({ onAdelantarClick, onProgramarClick }: {
   };
 
   return (
-    <div className="bg-white relative rounded-[16px] size-full" data-name="Admin">
-      <div className="content-stretch flex flex-col gap-[24px] items-start overflow-clip pb-[24px] pt-0 px-0 relative rounded-[inherit] size-full">
-        <Frame1 />
-        <Frame onInfoClick={handleInfoClick} onAdelantarClick={onAdelantarClick} onProgramarClick={onProgramarClick} />
-        {showPopover && (
-          <div className="absolute left-[22px] top-[224px] w-[243px]">
-            <Popover />
-          </div>
-        )}
+    <TotalDisponibleCtx.Provider value={totalDisponible ?? 30000000}>
+      <div className="bg-white relative rounded-[16px] size-full" data-name="Admin">
+        <div className="content-stretch flex flex-col gap-[24px] items-start overflow-clip pb-[24px] pt-0 px-0 relative rounded-[inherit] size-full">
+          <Frame1 />
+          <Frame onInfoClick={handleInfoClick} onAdelantarClick={onAdelantarClick} onProgramarClick={onProgramarClick} />
+          {showPopover && (
+            <div className="absolute left-[22px] top-[224px] w-[243px]">
+              <Popover />
+            </div>
+          )}
+        </div>
+        <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-[-1px] pointer-events-none rounded-[17px]" />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#d0d4e6] border-solid inset-[-1px] pointer-events-none rounded-[17px]" />
-    </div>
+    </TotalDisponibleCtx.Provider>
   );
 }
