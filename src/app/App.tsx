@@ -496,7 +496,7 @@ export default function App() {
         onClick={handleScreenInteraction}
       >
         {/* Status bar fixo — fica por cima de todas as camadas */}
-        <StatusBar />
+        <StatusBar transparent={selectedCase === "not-allowed-con-historial" || selectedCase === "not-allowed-sin-historial"} />
 
         {/* Dimmer + sheet do calendário — renderizados aqui para ficarem acima da StatusBar */}
         {calendarOpen && (

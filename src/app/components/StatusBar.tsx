@@ -38,7 +38,7 @@ function getCurrentTime() {
   return `${h}:${m}`;
 }
 
-export function StatusBar() {
+export function StatusBar({ transparent = false }: { transparent?: boolean }) {
   const [time, setTime] = useState(getCurrentTime);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export function StatusBar() {
 
   return (
     <div
-      className="absolute top-0 left-0 right-0 h-[52px] z-50"
+      className={`absolute top-0 left-0 right-0 h-[52px] z-50${transparent ? "" : " bg-white"}`}
       data-name="StatusBar overlay"
     >
       <div className="flex flex-row items-end size-full">

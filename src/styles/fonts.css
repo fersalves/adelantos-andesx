@@ -1,2 +1,7 @@
 /* Inter é carregada via Google Fonts no index.html */
 /* font-weight é controlado pelo inline style fontWeight em cada componente */
+
+/* Esconde o status bar estático dos componentes Figma — a StatusBar overlay em App.tsx exibe o horário real */
+[data-name="Status bar android"] {
+  visibility: hidden;
+}
